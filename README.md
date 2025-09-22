@@ -2,20 +2,128 @@
 
 ## 🚀 Project Overview
 
-**RivalismeUniverse: Domain AI Automata** is a hackathon platform for the DoraHacks DomainFi Challenge 2025, merging AI Agents, DeFi, and digital domains.
+**RivalismeUniverse: Domain AI Automata** is a hackathon prototype for the DoraHacks DomainFi Challenge 2025, merging AI Agents, DeFi, and digital domains.
 
 ### 🎯 Vision
 
 Transform internet domains into unique AI personas that can:
-- Generate and automate content (blogs, posts, tweets)
-- Act as bots/agents on social media, Telegram, or Discord
+- Automatically generate content (blogs, posts, tweets)
+- Act as bots/agents on social media, Telegram, Discord
 - Tokenize domains via Doma Protocol for DeFi use cases (collateral, trading, auction)
-- Provide analytics & scoring for domains using AI + on-chain data
+- Provide analytics & scoring using AI + on-chain data
 - Host personalized landing pages
 
 ---
 
-## 🏗️ Current Repository Structure
+## 🏗️ Repository Structure
+
+```
+/RivalismeUniverse-
+│── README.md
+│── requirements.txt
+│── ai/
+│   ├── persona_agent.py
+│   └── personas.json
+│── app/
+│   └── server.py
+│── contracts/
+│   └── DomainAuction.sol
+```
+
+---
+
+## 📦 Tech Stack
+
+- **AI Persona Engine:** Python (offline, no API key required)
+- **Backend API:** Python Flask (for demo endpoint)
+- **Smart Contracts:** Solidity (Doma testnet, auction logic)
+- **Frontend:** *(coming soon)*
+
+---
+
+## ✨ Key Features
+
+- **AI Persona Engine:**  
+  - Each persona generates creative, monetizable content ideas.
+  - Fully offline, deterministic (no paid API required).
+- **API Server:**  
+  - Demo Flask server exposes persona ideas via endpoint.
+- **Smart Contract:**  
+  - Minimal Solidity contract for domain auctions.
+- **Modular & Hackathon-Ready:**  
+  - All components can run independently for demo and extension.
+
+---
+
+## ⚡ Quickstart Demo
+
+### 1. Run AI persona agent offline
+
+```bash
+python ai/persona_agent.py
+```
+Output: Content ideas for each persona (UNUSER, SOLARA, NEXAR).
+
+---
+
+### 2. Launch Flask API server (optional demo)
+
+```bash
+pip install flask
+python app/server.py
+```
+Access persona content via browser or HTTP request:
+```
+http://127.0.0.1:5000/generate/UNUSER
+http://127.0.0.1:5000/generate/SOLARA
+http://127.0.0.1:5000/generate/NEXAR
+```
+
+---
+
+### 3. Review Smart Contract (Solidity)
+
+File: `contracts/DomainAuction.sol`  
+You can deploy/test with Hardhat or Remix for auction logic demo.
+
+---
+
+## 📚 Documentation & Next Steps
+
+- Architecture docs *(coming soon)* in `docs/`
+- Frontend dashboard *(coming soon)*
+- Integration with Doma Protocol *(planned)*
+
+---
+
+## ✅ Status: Ready for Demo & Presentation!
+
+- **Repo is clean, modular, and easy to test.**
+- **No API key or paid service required.**
+- **Can be presented fully offline or via local server.**
+- **Easy to expand for hackathon or real-world MVP.**
+
+---
+
+## 💡 Hackathon Note
+
+Focused on:
+- AI persona content engine
+- Minimal API server
+- Smart contract demo
+- Modular structure (easy to expand)
+
+---
+
+## 🛠️ Contributing
+
+Open for ideas, pull requests, and collaboration!
+
+---
+
+## 🏆 DoraHacks DomainFi Challenge 2025
+
+Pushing decentralized domain utility, real-world asset tokenization, and AI agent automation.
 
 ```
 /RivalismeUniverse-
