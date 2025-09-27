@@ -2,6 +2,10 @@
 **DoraHacks 2025 - DomainFi Challenge Submission**
 
 > Transform domains into competing AI personalities - Built for the future of AI-powered internet
+>
+> > **🚀 MVP Built with Free AI Resources**  
+> *This prototype demonstrates the core innovation using free tools.  
+> Production version ready for premium API integration with funding.*
 
 ## 🚀 Live Demo
 **[🎮 Try Demo Now](https://unuserv01-lab.github.io/RivalismeUniverse-Domain-AI-Automata-/)**
