@@ -1,2096 +1,888 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- 🔮 META SEO -->
-  <meta name="title" content="RIVALISME UNIVERSE - DIMENSIONAL PORTAL">
-  <meta name="description" content="Masuki Rivalisme Universe: portal kosmik untuk AI persona, kreativitas, dan eksplorasi dimensi digital. Powered by DOMA Protocol.">
-  <meta name="keywords" content="RivalismeUniverse, AI Persona, Dimensional Portal, DOMA Protocol, Cyber Spiritual, Metaverse">
-  <meta name="author" content="RivalismeUniverse">
-
-  <!-- 🌌 OPEN GRAPH (FACEBOOK, DISCORD, LINKEDIN) -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://rivalismeuniverse.com/">
-  <meta property="og:title" content="RIVALISME UNIVERSE - DIMENSIONAL PORTAL">
-  <meta property="og:description" content="Portal AI & kosmos digital untuk kreator, akademisi, dan petualang spiritual.">
-  <meta property="og:image" content="https://rivalismeuniverse.com/preview.jpg">
-
-  <!-- 🐦 TWITTER CARD -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://rivalismeuniverse.com/">
-  <meta name="twitter:title" content="RIVALISME UNIVERSE - DIMENSIONAL PORTAL">
-  <meta name="twitter:description" content="Eksplorasi kosmik AI & persona digital. Bergabunglah dengan RivalismeUniverse.">
-  <meta name="twitter:image" content="https://rivalismeuniverse.com/preview.jpg">
-  
-<title>RIVALISME UNIVERSE - DIMENSIONAL PORTAL</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cinzel:wght@400;600;800&family=Source+Code+Pro:wght@400;700&display=swap');
-
-/* ========================= */
-/* GLOBAL & COSMIC SETUP */
-/* ========================= */
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-
-body {
-background: linear-gradient(135deg, #000000 0%, #0f0f0f 30%, #1a1a2e 70%, #000000 100%);
-color: white;
-font-family: 'Orbitron', sans-serif;
-overflow-x: hidden;
-min-height: 100vh;
-position: relative;
-}
-
-/* COSMIC STARS BACKGROUND */
-body::before {
-content: '';
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-image:
-radial-gradient(2px 2px at 20px 30px, #fff, transparent),
-radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
-radial-gradient(1px 1px at 90px 40px, #fff, transparent),
-radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
-radial-gradient(2px 2px at 160px 30px, #fff, transparent);
-background-repeat: repeat;
-background-size: 200px 100px;
-animation: cosmicMove 60s linear infinite;
-opacity: 0.8;
-z-index: -1;
-}
-
-@keyframes cosmicMove {
-from { transform: translateY(0px); }
-to { transform: translateY(-100px); }
-}
-
-/* TWINKLING STARS EFFECT */
-body::after {
-content: '';
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-image:
-radial-gradient(1px 1px at 25px 25px, rgba(255,20,147,0.8), transparent),
-radial-gradient(1px 1px at 75px 75px, rgba(0,255,255,0.8), transparent),
-radial-gradient(1px 1px at 125px 125px, rgba(255,20,147,0.6), transparent);
-background-repeat: repeat;
-background-size: 150px 150px;
-animation: twinkle 4s ease-in-out infinite alternate;
-opacity: 0.7;
-z-index: -1;
-}
-
-@keyframes twinkle {
-0% { opacity: 0.3; }
-50% { opacity: 0.8; }
-100% { opacity: 0.3; }
-}
-
-/* ========================= */
-/* LOADING SCREEN */
-/* ========================= */
-.loading-screen {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
-display: grid;
-place-items: center;
-z-index: 1000;
-transition: opacity 0.8s ease;
-}
-
-.loading-content {
-text-align: center;
-}
-
-.loading-title {
-font-family: 'Cinzel', serif;
-font-size: 3rem;
-font-weight: 800;
-letter-spacing: 4px;
-margin-bottom: 2rem;
-background: linear-gradient(45deg, #ff1493, #00ffff, #ff1493);
-background-size: 200% 200%;
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-animation: neonPulse 3s ease-in-out infinite;
-}
-
-.loading-quote {
-font-size: 1.3rem;
-font-family: 'Source Code Pro', monospace;
-opacity: 0;
-animation: fadeIn 2s forwards, textGlow 2s ease-in-out infinite alternate;
-max-width: 600px;
-line-height: 1.6;
-}
-
-.loading-quote.active {
-opacity: 1;
-}
-
-@keyframes neonPulse {
-0%, 100% { background-position: 0% 50%; }
-50% { background-position: 100% 50%; }
-}
-
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(20px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes textGlow {
-from { text-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.3); }
-to { text-shadow: 0 0 20px #00ffff, 0 0 30px #ff1493, 0 0 40px rgba(255,255,255,0.8); }
-}
-
-/* ========================= */
-/* HEADER & DOMA PROTOCOL INTEGRATION */
-/* ========================= */
-.main-header {
-padding: 2rem;
-text-align: center;
-position: relative;
-background: rgba(15, 23, 42, 0.8);
-backdrop-filter: blur(10px);
-border-bottom: 2px solid rgba(255, 20, 147, 0.3);
-}
-
-.main-header h1 {
-font-size: 2.5rem;
-background: linear-gradient(45deg, #ff1493, #00ffff, #ff1493);
-background-size: 200% 200%;
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-animation: neonText 3s ease-in-out infinite;
-margin-bottom: 0.5rem;
-text-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
-}
-
-@keyframes neonText {
-0%, 100% { background-position: 0% 50%; }
-50% { background-position: 100% 50%; }
-}
-
-.subtitle {
-color: #00ffff;
-font-size: 1rem;
-margin-top: 0.5rem;
-text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
-
-.header-stats {
-margin-top: 1rem;
-font-size: 0.9rem;
-color: #94a3b8;
-}
-
-.responsible-innovation {
-margin-top: 2rem;
-padding: 1rem;
-background: rgba(255, 20, 147, 0.1);
-border-radius: 1rem;
-border: 1px solid rgba(255, 20, 147, 0.3);
-max-width: 800px;
-margin-left: auto;
-margin-right: auto;
-}
-
-.responsible-innovation h3 {
-color: #00ffff;
-margin-bottom: 0.5rem;
-font-size: 1rem;
-}
-
-.responsible-innovation p {
-font-size: 0.9rem;
-color: #cbd5e1;
-text-align: left;
-line-height: 1.4;
-}
-
-.innovation-features {
-margin-top: 0.8rem;
-display: flex;
-flex-wrap: wrap;
-gap: 1rem;
-font-size: 0.8rem;
-color: #ff1493;
-}
-
-/* ========================= */
-/* PORTAL SELECTION */
-/* ========================= */
-.portal-selection {
-display: none;
-min-height: 100vh;
-padding: 4rem 2rem;
-text-align: center;
-}
-
-.portal-main-title {
-font-family: 'Cinzel', serif;
-font-size: 4rem;
-font-weight: 800;
-margin-bottom: 1rem;
-letter-spacing: 6px;
-background: linear-gradient(45deg, #ff1493, #00ffff, #ffffff, #ff1493);
-background-size: 300% 300%;
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-animation: neonPulse 4s ease-in-out infinite;
-text-shadow: 0 0 30px rgba(255,20,147,0.8);
-}
-
-.portal-subtitle {
-font-family: 'Source Code Pro', monospace;
-font-size: 1.2rem;
-color: #00ffff;
-margin-bottom: 3rem;
-letter-spacing: 2px;
-text-shadow: 0 0 10px rgba(0,255,255,0.6);
-}
-
-.portal-categories {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-gap: 4rem;
-max-width: 1000px;
-margin: 0 auto;
-}
-
-.category-portal {
-background: rgba(255, 255, 255, 0.05);
-backdrop-filter: blur(15px);
-border-radius: 25px;
-padding: 3rem;
-border: 2px solid rgba(255, 20, 147, 0.3);
-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-cursor: pointer;
-position: relative;
-overflow: hidden;
-}
-
-.category-portal::before {
-content: '';
-position: absolute;
-top: -50%;
-left: -50%;
-width: 200%;
-height: 200%;
-background: radial-gradient(circle, rgba(255, 20, 147, 0.1) 0%, transparent 70%);
-transform: rotate(0deg);
-transition: all 0.6s ease;
-opacity: 0;
-}
-
-.category-portal:hover::before {
-opacity: 1;
-transform: rotate(180deg);
-}
-
-.category-portal:hover {
-transform: scale(1.05) perspective(1000px) rotateX(5deg);
-border-color: #ff1493;
-box-shadow:
-0 20px 40px rgba(255, 20, 147, 0.4),
-0 0 60px rgba(0, 255, 255, 0.3),
-inset 0 0 30px rgba(255, 255, 255, 0.1);
-}
-
-.category-icon {
-font-size: 4rem;
-margin-bottom: 1.5rem;
-display: block;
-}
-
-.content-creator-icon {
-background: linear-gradient(45deg, #ff6347, #ffd700, #00ffff);
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-}
-
-.academic-icon {
-background: linear-gradient(45deg, #4169e1, #daa520, #32cd32);
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-}
-
-.category-title {
-font-family: 'Cinzel', serif;
-font-size: 2.2rem;
-font-weight: 600;
-margin-bottom: 1rem;
-letter-spacing: 2px;
-}
-
-.category-description {
-font-family: 'Source Code Pro', monospace;
-font-size: 1rem;
-color: rgba(255, 255, 255, 0.8);
-line-height: 1.6;
-margin-bottom: 2rem;
-}
-
-.persona-preview {
-display: flex;
-justify-content: center;
-gap: 1rem;
-margin-bottom: 1.5rem;
-flex-wrap: wrap;
-}
-
-.preview-badge {
-padding: 0.5rem 1rem;
-background: rgba(255, 255, 255, 0.1);
-border-radius: 20px;
-font-size: 0.8rem;
-border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.enter-button {
-padding: 1rem 2.5rem;
-border: 2px solid #00ffff;
-background: rgba(0, 255, 255, 0.1);
-color: #00ffff;
-font-family: 'Orbitron', sans-serif;
-font-weight: 700;
-font-size: 1.1rem;
-border-radius: 50px;
-cursor: pointer;
-transition: all 0.3s ease;
-text-transform: uppercase;
-letter-spacing: 1px;
-}
-
-.enter-button:hover {
-background: #00ffff;
-color: #000000;
-box-shadow: 0 0 30px #00ffff, 0 0 60px rgba(0, 255, 255, 0.5);
-transform: translateY(-3px);
-}
-
-/* ========================= */
-/* CHARACTER PAGES */
-/* ========================= */
-.character-page {
-display: none;
-min-height: 100vh;
-padding: 2rem;
-position: relative;
-}
-
-.page-header {
-text-align: center;
-margin-bottom: 3rem;
-}
-
-.page-title {
-font-family: 'Cinzel', serif;
-font-size: 3rem;
-margin-bottom: 1rem;
-background: linear-gradient(45deg, #ff1493, #00ffff);
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-}
-
-.back-portal {
-position: fixed;
-top: 2rem;
-left: 2rem;
-padding: 0.8rem 1.5rem;
-background: rgba(255, 20, 147, 0.2);
-border: 2px solid #ff1493;
-color: #ff1493;
-text-decoration: none;
-border-radius: 25px;
-font-family: 'Orbitron', sans-serif;
-font-weight: 600;
-transition: all 0.3s ease;
-z-index: 100;
-}
-
-.back-portal:hover {
-background: #ff1493;
-color: #000000;
-box-shadow: 0 0 20px #ff1493;
-}
-
-.character-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-gap: 3rem;
-max-width: 1200px;
-margin: 0 auto;
-}
-
-.character-card {
-background: rgba(30, 41, 59, 0.8);
-backdrop-filter: blur(10px);
-border-radius: 25px;
-padding: 2.5rem;
-text-align: center;
-border: 2px solid rgba(255, 20, 147, 0.3);
-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-cursor: pointer;
-position: relative;
-overflow: hidden;
-}
-
-.character-card::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255, 20, 147, 0.4), transparent);
-transition: left 0.5s;
-}
-
-.character-card:hover::before {
-left: 100%;
-}
-
-.character-card:hover {
-transform: scale(1.05) translateY(-10px);
-border-color: #ff1493;
-box-shadow:
-0 25px 50px rgba(255, 20, 147, 0.3),
-0 0 40px rgba(255, 20, 147, 0.2);
-}
-
-.character-avatar {
-width: 150px;
-height: 150px;
-border-radius: 50%;
-margin: 0 auto 2rem;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 4rem;
-border: 3px solid rgba(255, 20, 147, 0.5);
-transition: all 0.3s ease;
-background: linear-gradient(45deg, #333, #555);
-overflow: hidden;
-}
-
-.character-avatar img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-}
-
-.character-card:hover .character-avatar {
-border-color: #ff1493;
-box-shadow: 0 0 30px rgba(255, 20, 147, 0.6);
-transform: scale(1.1);
-}
-
-.character-name {
-font-family: 'Cinzel', serif;
-font-size: 1.8rem;
-margin-bottom: 0.5rem;
-color: #00ffff;
-}
-
-.character-tagline {
-font-style: italic;
-color: #ff1493;
-margin-bottom: 1rem;
-font-size: 1rem;
-}
-
-.character-description {
-color: #cbd5e1;
-line-height: 1.5;
-margin-bottom: 1.5rem;
-}
-
-.character-stats {
-display: flex;
-justify-content: space-between;
-margin-top: 1.5rem;
-font-size: 0.9rem;
-color: #00ffff;
-}
-
-.stat-item {
-text-align: center;
-}
-
-.stat-value {
-display: block;
-font-weight: bold;
-font-size: 1.1rem;
-}
-
-/* ========================= */
-/* UNIVERSE PAGES STYLES */
-/* ========================= */
-.universe-page {
-display: none;
-padding: 2rem;
-position: relative;
-background: rgba(15, 23, 42, 0.9);
-backdrop-filter: blur(15px);
-border-radius: 2rem;
-margin: 2rem;
-border: 2px solid rgba(255, 20, 147, 0.3);
-}
-
-.universe-page h2 {
-font-size: 2.5rem;
-text-align: center;
-margin-bottom: 2rem;
-background: linear-gradient(45deg, #ff1493, #00ffff);
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-text-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
-}
-
-.nav-buttons {
-display: flex;
-justify-content: center;
-gap: 1rem;
-margin-bottom: 2rem;
-flex-wrap: wrap;
-}
-
-.nav-buttons button {
-padding: 1rem 2rem;
-border: none;
-border-radius: 50px;
-background: linear-gradient(45deg, #ff1493, #00ffff);
-color: #0a0a0a;
-font-weight: bold;
-font-size: 1rem;
-cursor: pointer;
-transition: all 0.3s ease;
-position: relative;
-overflow: hidden;
-}
-
-.nav-buttons button::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(45deg, #00ffff, #ff1493);
-transition: left 0.3s ease;
-}
-
-.nav-buttons button:hover::before {
-left: 0;
-}
-
-.nav-buttons button span {
-position: relative;
-z-index: 1;
-}
-
-.nav-buttons button:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 20px rgba(255, 20, 147, 0.4);
-}
-
-/* Content Areas */
-.teach-content, .quiz-content, .arena-content, .certificate-content, .interact-content {
-background: rgba(30, 41, 59, 0.6);
-backdrop-filter: blur(10px);
-border-radius: 1.5rem;
-padding: 2rem;
-margin: 2rem 0;
-border: 1px solid rgba(255, 20, 147, 0.2);
-}
-
-.teach-content h3, .quiz-content h3, .arena-content h3, .certificate-content h3, .interact-content h3 {
-color: #00ffff;
-margin-bottom: 1rem;
-font-size: 1.5rem;
-text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
-
-.teach-content ul {
-list-style: none;
-padding: 0;
-}
-
-.teach-content li {
-background: rgba(51, 65, 85, 0.5);
-margin: 1rem 0;
-padding: 1rem;
-border-radius: 0.5rem;
-border-left: 4px solid #ff1493;
-transition: all 0.3s ease;
-}
-
-.teach-content li:hover {
-background: rgba(51, 65, 85, 0.8);
-transform: translateX(10px);
-}
-
-/* Arena Competition */
-.arena-content {
-text-align: center;
-}
-
-.versus-display {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin: 2rem 0;
-gap: 2rem;
-}
-
-.competitor {
-flex: 1;
-background: rgba(51, 65, 85, 0.5);
-padding: 1.5rem;
-border-radius: 1rem;
-border: 2px solid rgba(255, 20, 147, 0.3);
-transition: all 0.3s ease;
-}
-
-.competitor:hover {
-border-color: #ff1493;
-transform: scale(1.05);
-}
-
-.vs-divider {
-font-size: 2rem;
-font-weight: bold;
-color: #00ffff;
-text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-animation: pulse 2s ease-in-out infinite;
-}
-
-.ai-powered-badge {
-font-size: 0.8rem;
-color: #ffd700;
-margin-top: 0.5rem;
-font-style: italic;
-}
-
-@keyframes pulse {
-0%, 100% { transform: scale(1); }
-50% { transform: scale(1.2); }
-}
-
-/* Quiz Styles */
-.quiz-question {
-background: rgba(51, 65, 85, 0.5);
-margin: 1.5rem 0;
-padding: 1.5rem;
-border-radius: 1rem;
-border-left: 4px solid #00ffff;
-}
-
-.quiz-question p {
-font-weight: bold;
-margin-bottom: 1rem;
-color: #00ffff;
-}
-
-.quiz-question label {
-display: block;
-margin: 0.5rem 0;
-cursor: pointer;
-transition: all 0.3s ease;
-padding: 0.5rem;
-border-radius: 0.5rem;
-}
-
-.quiz-question label:hover {
-background: rgba(255, 20, 147, 0.2);
-transform: translateX(5px);
-}
-
-/* Certificate Styles */
-.certificate-preview {
-background: linear-gradient(45deg, #1a1a2e, #16213e);
-border: 3px solid #daa520;
-border-radius: 15px;
-padding: 2rem;
-text-align: center;
-margin: 2rem 0;
-position: relative;
-overflow: hidden;
-}
-
-.certificate-preview::before {
-content: '';
-position: absolute;
-top: -50%;
-left: -50%;
-width: 200%;
-height: 200%;
-background: radial-gradient(circle, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
-animation: rotate 10s linear infinite;
-}
-
-@keyframes rotate {
-from { transform: rotate(0deg); }
-to { transform: rotate(360deg); }
-}
-
-.certificate-title {
-font-family: 'Cinzel', serif;
-font-size: 2rem;
-color: #daa520;
-margin-bottom: 1rem;
-}
-
-.certificate-details {
-color: #cbd5e1;
-line-height: 1.6;
-margin-bottom: 1.5rem;
-}
-
-.mint-button {
-padding: 1rem 2rem;
-border: 2px solid #daa520;
-background: rgba(218, 165, 32, 0.1);
-color: #daa520;
-font-family: 'Orbitron', sans-serif;
-font-weight: 700;
-border-radius: 50px;
-cursor: pointer;
-transition: all 0.3s ease;
-font-size: 1.1rem;
-}
-
-.mint-button:hover {
-background: #daa520;
-color: #000000;
-box-shadow: 0 0 30px #daa520;
-transform: translateY(-2px);
-}
-
-/* Interaction Form Styles */
-.interaction-form {
-background: rgba(51, 65, 85, 0.5);
-padding: 1.5rem;
-border-radius: 1rem;
-margin: 1rem 0;
-border-left: 4px solid #ff1493;
-}
-
-.form-group {
-margin-bottom: 1rem;
-}
-
-.form-group label {
-display: block;
-margin-bottom: 0.5rem;
-color: #00ffff;
-font-weight: bold;
-}
-
-.form-group input, .form-group textarea, .form-group select {
-width: 100%;
-padding: 0.8rem;
-border: 2px solid rgba(255, 20, 147, 0.3);
-background: rgba(30, 41, 59, 0.8);
-color: white;
-border-radius: 0.5rem;
-font-family: 'Source Code Pro', monospace;
-}
-
-.form-group textarea {
-min-height: 100px;
-resize: vertical;
-}
-
-.submit-interaction {
-padding: 1rem 2rem;
-border: 2px solid #00ffff;
-background: rgba(0, 255, 255, 0.2);
-color: #00ffff;
-border-radius: 50px;
-cursor: pointer;
-transition: all 0.3s ease;
-font-family: 'Orbitron', sans-serif;
-font-weight: 600;
-width: 100%;
-}
-
-.submit-interaction:hover {
-background: #00ffff;
-color: #000000;
-box-shadow: 0 0 20px #00ffff;
-}
-
-/* Buttons */
-.back-button, .submit-button, .interact-button, .generate-btn {
-margin: 1rem 0.5rem;
-padding: 0.8rem 1.5rem;
-border: 2px solid #ff1493;
-background: rgba(255, 20, 147, 0.2);
-color: #ff1493;
-border-radius: 25px;
-cursor: pointer;
-transition: all 0.3s ease;
-font-family: 'Orbitron', sans-serif;
-font-weight: 600;
-}
-
-.submit-button {
-background: linear-gradient(45deg, #10b981, #00ffff);
-border: 2px solid #00ffff;
-color: #000000;
-}
-
-.generate-btn {
-background: rgba(255, 20, 147, 0.2);
-border: 2px solid #ff1493;
-color: #ff1493;
-}
-
-.interact-button {
-margin-top: 1.5rem;
-padding: 0.8rem 2rem;
-}
-
-.back-button:hover, .interact-button:hover, .generate-btn:hover {
-background: #ff1493;
-color: #000000;
-box-shadow: 0 0 20px #ff1493;
-}
-
-.submit-button:hover {
-background: #00ffff;
-color: #000000;
-box-shadow: 0 0 20px #00ffff;
-}
-
-/* Content Display */
-.content-display {
-background: rgba(30, 41, 59, 0.8);
-backdrop-filter: blur(10px);
-border-radius: 1.5rem;
-padding: 2rem;
-margin-top: 2rem;
-border: 2px solid rgba(0, 255, 255, 0.3);
-min-height: 200px;
-}
-
-.content-display h4 {
-color: #00ffff;
-margin-bottom: 1rem;
-text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
-
-.generated-text {
-font-style: italic;
-color: #cbd5e1;
-line-height: 1.6;
-border-left: 4px solid #ff1493;
-padding-left: 1rem;
-margin: 1rem 0;
-}
-
-.back-to-grid {
-margin-top: 2rem;
-padding: 0.8rem 1.5rem;
-background: rgba(255, 20, 147, 0.2);
-border: 2px solid #ff1493;
-color: #ff1493;
-text-decoration: none;
-border-radius: 25px;
-font-family: 'Orbitron', sans-serif;
-font-weight: 600;
-transition: all 0.3s ease;
-cursor: pointer;
-}
-
-.back-to-grid:hover {
-background: #ff1493;
-color: #000000;
-box-shadow: 0 0 20px #ff1493;
-}
-
-/* Loading Animation */
-.loading-spinner {
-display: none;
-width: 40px;
-height: 40px;
-border: 4px solid rgba(255, 20, 147, 0.3);
-border-radius: 50%;
-border-top-color: #ff1493;
-animation: spin 1s linear infinite;
-margin: 2rem auto;
-}
-
-@keyframes spin {
-to { transform: rotate(360deg); }
-}
-
-.loading {
-display: inline-block;
-width: 20px;
-height: 20px;
-border: 3px solid rgba(255, 20, 147, 0.3);
-border-radius: 50%;
-border-top-color: #ff1493;
-animation: spin 1s ease-in-out infinite;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-.portal-main-title { font-size: 2.5rem; }
-.portal-categories { grid-template-columns: 1fr; gap: 2rem; }
-.category-portal { padding: 2rem; }
-.character-grid { grid-template-columns: 1fr; }
-.back-portal { position: relative; top: auto; left: auto; margin-bottom: 2rem; display: inline-block; }
-.nav-buttons { flex-direction: column; align-items: center; }
-.nav-buttons button { width: 200px; margin: 0.5rem 0; }
-.versus-display { flex-direction: column; gap: 1rem; }
-}
-
-</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rivalisme Universe - Cosmic Portal</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #globe-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .ui-overlay > * {
+            pointer-events: auto;
+        }
+
+        .main-title {
+            position: absolute;
+            top: 8%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff1493, #00ffff, #ff1493);
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neonPulse 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255,20,147,0.8);
+            z-index: 10;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 18%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 1.5rem;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0,255,255,0.6);
+            z-index: 10;
+        }
+
+        .portal-buttons {
+            position: absolute;
+            bottom: 15%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 10;
+        }
+
+        .portal-btn {
+            padding: 1.2rem 2.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .portal-btn:hover {
+            background: #00ffff;
+            color: #000;
+            box-shadow: 0 0 30px #00ffff, 0 0 60px rgba(0, 255, 255, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .creator-btn {
+            border-color: #ff1493;
+            color: #ff1493;
+        }
+
+        .creator-btn:hover {
+            background: #ff1493;
+            color: #000;
+            box-shadow: 0 0 30px #ff1493, 0 0 60px rgba(255, 20, 147, 0.5);
+        }
+
+        .info-panel {
+            position: absolute;
+            top: 30%;
+            right: 5%;
+            width: 300px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 20, 147, 0.3);
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .info-panel h3 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .info-panel p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff1493;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .country-info {
+            position: absolute;
+            top: 30%;
+            left: 5%;
+            width: 300px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 20, 147, 0.3);
+            z-index: 10;
+            pointer-events: auto;
+            display: none;
+        }
+
+        .country-info h3 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .country-info p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .persona-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .persona-item {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 20, 147, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .persona-item:hover {
+            background: rgba(255, 20, 147, 0.3);
+            transform: translateX(5px);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,20,147,0.3) 0%, transparent 70%);
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .element-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .element-2 {
+            top: 60%;
+            left: 15%;
+            animation-delay: 2s;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 70%);
+        }
+
+        .element-3 {
+            top: 30%;
+            right: 10%;
+            animation-delay: 4s;
+            width: 120px;
+            height: 120px;
+        }
+
+        .element-4 {
+            top: 70%;
+            right: 15%;
+            animation-delay: 6s;
+            background: radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 70%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .pulse-ring {
+            position: absolute;
+            border: 2px solid #00ffff;
+            border-radius: 50%;
+            animation: pulse 3s infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+
+        .loading-title {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #ff1493, #00ffff, #ff1493);
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neonPulse 3s ease-in-out infinite;
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff1493, #00ffff);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* NEW FEATURES STYLES */
+        .wallet-section {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .connect-wallet-btn, .explore-somnia-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .connect-wallet-btn:hover, .explore-somnia-btn:hover {
+            background: #00ffff;
+            color: #000;
+            box-shadow: 0 0 30px #00ffff;
+            transform: translateY(-2px);
+        }
+
+        .wallet-connected {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .nft-mint-section {
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 20, 147, 0.3);
+            text-align: center;
+        }
+
+        .nft-preview {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1.5rem;
+            border-radius: 15px;
+            border: 3px solid #00ffff;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nft-preview::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 20, 147, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .mint-price {
+            color: #00ffff;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .mint-button {
+            padding: 1rem 2rem;
+            border: 2px solid #ff1493;
+            background: rgba(255, 20, 147, 0.2);
+            color: #ff1493;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .mint-button:hover {
+            background: #ff1493;
+            color: #000;
+            box-shadow: 0 0 30px #ff1493;
+            transform: translateY(-3px);
+        }
+
+        .ai-providers {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .ai-provider-badge {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ai-provider-badge.active {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+
+        .generation-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #00ffff;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .global-globe {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, 
+                rgba(0, 255, 255, 0.1) 0%,
+                rgba(255, 20, 147, 0.05) 40%,
+                transparent 70%);
+            box-shadow: 
+                0 0 200px rgba(0, 255, 255, 0.3),
+                inset 0 0 100px rgba(255, 20, 147, 0.2);
+            animation: globeRotate 60s linear infinite;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .globe-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(0, 255, 255, 0.1) 0%,
+                rgba(255, 20, 147, 0.05) 30%,
+                transparent 70%);
+            animation: globePulse 8s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        @keyframes globeRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes globePulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* NFT Modal */
+        .nft-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 20, 147, 0.3);
+            z-index: 1000;
+            display: none;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #ff1493;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+                top: 5%;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                top: 15%;
+            }
+
+            .portal-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                bottom: 10%;
+            }
+
+            .info-panel, .country-info {
+                position: relative;
+                width: 90%;
+                margin: 2rem auto;
+                right: auto;
+                left: auto;
+            }
+
+            .wallet-section {
+                position: relative;
+                top: auto;
+                right: auto;
+                justify-content: center;
+                margin-bottom: 2rem;
+            }
+
+            .global-globe {
+                width: 300px;
+                height: 300px;
+            }
+
+            .globe-glow {
+                width: 400px;
+                height: 400px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<div class="loading-screen" id="loadingScreen">
-<div class="loading-content">
-<h1 class="loading-title">RIVALISME UNIVERSE</h1>
-<div class="loading-quote active" id="loadingQuote">
-"The only way to the future is through the gates of the past."
-</div>
-</div>
-</div>
-
-<!-- Main Header with Doma Protocol Integration -->
-<div class="main-header" style="display: none;" id="mainHeader">
-<h1>RivalismeUniverse</h1>
-<p class="subtitle">Powered by Doma Protocol</p>
-<p>Transform Domains into Living AI Personalities - Cosmic Edition</p>
-<div class="header-stats">
-<span>🔥 Live Demo</span> | <span>⚔️ AI Competition</span> | <span>🏆 Persona Arena</span>
-</div>
-
-<!-- Responsible Innovation Framework -->
-<div class="responsible-innovation">
-<h3>🛡️ Responsible Innovation Framework</h3>
-<p>
-RivalismeUniverse is committed to developing technology that respects intellectual property rights, human dignity, and digital heritage.
-All historical personas use public domain information, with an ethical framework for future collaboration with families and official estates.
-</p>
-<div class="innovation-features">
-<span>✅ Authorized Partnerships</span>
-<span>✅ Clear Attribution</span>
-<span>✅ Revenue Sharing</span>
-<span>✅ Authenticity Verification</span>
-</div>
-</div>
-</div>
-
-<div class="portal-selection" id="portalSelection">
-<h1 class="portal-main-title">RIVALISME UNIVERSE</h1>
-<p class="portal-subtitle">CHOOSE YOUR DIMENSIONAL GATEWAY</p>
-<div class="portal-categories">
-<div class="category-portal" onclick="showCharacterPage('contentCreator')">
-<div class="category-icon content-creator-icon">🎭</div>
-<h2 class="category-title">CONTENT CREATOR REALM</h2>
-<p class="category-description">
-Enter the chaotic realm of modern digital personalities.
-These AI personas master the art of engagement, critique, and transformation through contemporary lens.
-</p>
-<div class="persona-preview">
-<span class="preview-badge">UNUSER</span>
-<span class="preview-badge">SOLARA</span>
-<span class="preview-badge">NEXAR</span>
-</div>
-<button class="enter-button">ENTER REALM</button>
-</div>
-
-<div class="category-portal" onclick="showCharacterPage('academic')">
-<div class="category-icon academic-icon">🏛️</div>
-<h2 class="category-title">ACADEMIC HALL</h2>
-<p class="category-description">
-Step into the timeless halls of knowledge.
-Converse with history's greatest minds who shaped science, philosophy, and human understanding.
-</p>
-<div class="persona-preview">
-<span class="preview-badge">EINSTEIN</span>
-<span class="preview-badge">NIETZSCHE</span>
-<span class="preview-badge">AL-KHWARIZMI</span>
-</div>
-<button class="enter-button">ENTER HALL</button>
-</div>
-</div>
-</div>
-
-<!-- Content Creator Realm -->
-<div class="character-page" id="contentCreatorPage">
-<a href="#" class="back-portal" onclick="showPortalSelection()">← BACK TO PORTAL</a>
-<div class="page-header">
-<h1 class="page-title">CONTENT CREATOR REALM</h1>
-<p style="color: #cbd5e1; font-family: 'Source Code Pro', monospace;">Gateway to contemporary digital souls</p>
-</div>
-<div class="character-grid">
-<div class="character-card" onclick="openPersona('unuser')">
-<div class="character-avatar">
-<img src="" alt="Unuser">
-</div>
-<h3 class="character-name">🔥 UNUSER</h3>
-<p class="character-tagline">Chaos Unveiling Truth</p>
-<p class="character-description">
-Satirical, sarcastic social critique. Roasting reality with brutal honesty that makes you think twice about modern society.
-</p>
-<div class="character-stats">
-<div class="stat-item">
-<span class="stat-value">4.8★</span>
-<span>Rating</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">$450</span>
-<span>/day</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">2.1K</span>
-<span>Users</span>
-</div>
-</div>
-<button class="interact-button">ENTER UNIVERSE</button>
-</div>
-
-<div class="character-card" onclick="openPersona('solara')">
-<div class="character-avatar">
-<img src="" alt="Solara">
-</div>
-<h3 class="character-name">✨ SOLARA</h3>
-<p class="character-tagline">Light Embracing Wounds</p>
-<p class="character-description">
-Poetic and spiritual content that transforms trauma into beauty through words that touch the soul.
-</p>
-<div class="character-stats">
-<div class="stat-item">
-<span class="stat-value">4.9★</span>
-<span>Rating</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">$380</span>
-<span>/day</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">1.8K</span>
-<span>Users</span>
-</div>
-</div>
-<button class="interact-button">ENTER UNIVERSE</button>
-</div>
-
-<div class="character-card" onclick="openPersona('nexar')">
-<div class="character-avatar">
-<img src="" alt="Nexar">
-</div>
-<h3 class="character-name">🤖 NEXAR</h3>
-<p class="character-tagline">System Distrusting System</p>
-<p class="character-description">
-Existential and logical thinking that hacks mental frameworks with AI prompts and philosophical tools.
-</p>
-<div class="character-stats">
-<div class="stat-item">
-<span class="stat-value">4.7★</span>
-<span>Rating</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">$520</span>
-<span>/day</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">1.5K</span>
-<span>Users</span>
-</div>
-</div>
-<button class="interact-button">ENTER UNIVERSE</button>
-</div>
-</div>
-</div>
-
-<!-- Academic Hall -->
-<div class="character-page" id="academicPage">
-<a href="#" class="back-portal" onclick="showPortalSelection()">← BACK TO PORTAL</a>
-<div class="page-header">
-<h1 class="page-title">ACADEMIC HALL</h1>
-<p style="color: #cbd5e1; font-family: 'Source Code Pro', monospace;">Interact with the geniuses who shaped civilization</p>
-</div>
-<div class="character-grid">
-<div class="character-card" onclick="openPersona('einstein')">
-<div class="character-avatar">
-<img src="https://images.unsplash.com/photo-1594916374026-66b449b5c3be?w=150&h=150&fit=crop&crop=face" alt="Einstein">
-</div>
-<h3 class="character-name">🧠 EINSTEIN</h3>
-<p class="character-tagline">Curiosity Is My Compass</p>
-<p class="character-description">
-Genius physicist who explains complex concepts in simple ways full of witty analogies.
-</p>
-<div class="character-stats">
-<div class="stat-item">
-<span class="stat-value">4.9★</span>
-<span>Rating</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">$600</span>
-<span>/day</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">3.2K</span>
-<span>Students</span>
-</div>
-</div>
-<button class="interact-button">ENTER UNIVERSE</button>
-</div>
-
-<div class="character-card" onclick="openPersona('nietzsche')">
-<div class="character-avatar">
-<img src="https://images.unsplash.com/photo-1594916374026-66b449b5c3be?w=150&h=150&fit=crop&crop=face" alt="Nietzsche">
-</div>
-<h3 class="character-name">🔨 NIETZSCHE</h3>
-<p class="character-tagline">Destroying Idols with a Hammer</p>
-<p class="character-description">
-Provocative philosopher who shakes old values and speaks about the will to power.
-</p>
-<div class="character-stats">
-<div class="stat-item">
-<span class="stat-value">4.8★</span>
-<span>Rating</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">$550</span>
-<span>/day</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">2.8K</span>
-<span>Students</span>
-</div>
-</div>
-<button class="interact-button">ENTER UNIVERSE</button>
-</div>
-
-<div class="character-card" onclick="openPersona('alkhwarizmi')">
-<div class="character-avatar">
-<img src="https://images.unsplash.com/photo-1594916374026-66b449b5c3be?w=150&h=150&fit=crop&crop=face" alt="Al-Khwarizmi">
-</div>
-<h3 class="character-name">📚 AL-KHWARIZMI</h3>
-<p class="character-tagline">The Logic of Creation</p>
-<p class="character-description">
-Father of algebra who connects mathematics with wisdom and spirituality.
-</p>
-<div class="character-stats">
-<div class="stat-item">
-<span class="stat-value">4.7★</span>
-<span>Rating</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">$480</span>
-<span>/day</span>
-</div>
-<div class="stat-item">
-<span class="stat-value">2.1K</span>
-<span>Students</span>
-</div>
-</div>
-<button class="interact-button">ENTER UNIVERSE</button>
-</div>
-</div>
-</div>
-
-<!-- Persona Universe Pages -->
-<div id="persona-page" style="display: none;">
-<!-- Content Creator Personas -->
-<div id="unuser-page" class="universe-page">
-<h2>🔥 Unuser - Arena Edition</h2>
-<div class="nav-buttons">
-<button onclick="showTeach('unuser')"><span>📚 Learning</span></button>
-<button onclick="showArena('unuser')"><span>⚔️ Arena Battle</span></button>
-<button onclick="showQuiz('unuser')"><span>🏆 Challenge</span></button>
-<button onclick="showInteract('unuser')"><span>💬 Interact</span></button>
-<button onclick="generateContent('unuser')" class="generate-btn">🎯 Generate Content</button>
-</div>
-
-<div id="unuserTeach" class="teach-content" style="display:none;">
-<h3>🔥 Chaos Philosophy & Social Critique</h3>
-<ul>
-<li>🎭 Satirical Analysis: Deconstructing social norms with sharp humor</li>
-<li>💀 Brutal Honesty: Truth-telling without filters or diplomacy</li>
-<li>🧠 Critical Thinking: Teaching healthy skepticism towards status quo</li>
-<li>⚡ Roasting Technique: Art of intelligent mockery that's educational</li>
-<li>🎪 Chaos Theory: Finding patterns in social absurdity</li>
-</ul>
-</div>
-
-<div id="unuserArena" class="arena-content" style="display:none;">
-<h3>⚔️ Unuser Arena - Battle of Chaos</h3>
-<div class="versus-display">
-<div class="competitor">
-<h4>🔥 Unuser #001</h4>
-<p><strong>Specialty:</strong> Political Satire</p>
-<p><strong>Win Rate:</strong> 73%</p>
-<p><strong>Creator:</strong> ChaosPhilosopher_NYC</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-unuser001"></span></div>
-<button onclick="vote('unuser001')" class="generate-btn">Vote This Persona</button>
-</div>
-<div class="vs-divider">VS</div>
-<div class="competitor">
-<h4>🔥 Unuser #047</h4>
-<p><strong>Specialty:</strong> Social Media Roasting</p>
-<p><strong>Win Rate:</strong> 68%</p>
-<p><strong>Creator:</strong> SatireMaster_LA</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-unuser047"></span></div>
-<button onclick="vote('unuser047')" class="generate-btn">Vote This Persona</button>
-</div>
-</div>
-<div id="battleResult" style="display:none; margin-top: 2rem; padding: 1rem; background: rgba(255, 20, 147, 0.1); border-radius: 1rem;">
-<h4 style="color: #00ffff;">🏆 Battle Results</h4>
-<div id="battleText"></div>
-</div>
-</div>
-
-<div id="unuserQuiz" class="quiz-content" style="display:none;"></div>
-
-<div id="unuserInteract" class="interact-content" style="display:none;">
-<h3>💬 Interact with Unuser</h3>
-<div class="interaction-form">
-<div class="form-group">
-<label for="unuser-topic">Topic for Discussion:</label>
-<input type="text" id="unuser-topic" placeholder="e.g., modern society, politics, social media trends...">
-</div>
-<div class="form-group">
-<label for="unuser-style">Roasting Intensity:</label>
-<select id="unuser-style">
-<option value="light">Light Roast (Playful)</option>
-<option value="medium">Medium Roast (Balanced)</option>
-<option value="dark">Dark Roast (Brutal)</option>
-</select>
-</div>
-<div class="form-group">
-<label for="unuser-message">Your Message to Unuser:</label>
-<textarea id="unuser-message" placeholder="What would you like Unuser to roast or analyze?"></textarea>
-</div>
-<button class="submit-interaction" onclick="submitInteraction('unuser')">🔥 Get Roasted!</button>
-</div>
-</div>
-
-<div id="unuserContent" class="content-display" style="display:none;">
-<h4 id="unuserContentTitle">🔥 Unuser Generated Content</h4>
-<div class="loading-spinner" id="unuserLoading"></div>
-<div id="unuserContentText"></div>
-</div>
-<button class="back-button" onclick="closePersona()">⬅️ Back to Arena</button>
-</div>
-
-<div id="solara-page" class="universe-page">
-<h2>✨ Solara - Healing Arena</h2>
-<div class="nav-buttons">
-<button onclick="showTeach('solara')"><span>📚 Learning</span></button>
-<button onclick="showArena('solara')"><span>⚔️ Arena Battle</span></button>
-<button onclick="showQuiz('solara')"><span>🏆 Challenge</span></button>
-<button onclick="showInteract('solara')"><span>💬 Interact</span></button>
-<button onclick="generateContent('solara')" class="generate-btn">✨ Generate Content</button>
-</div>
-
-<div id="solaraTeach" class="teach-content" style="display:none;">
-<h3>✨ Spiritual Healing & Poetic Wisdom</h3>
-<ul>
-<li>🌸 Trauma Alchemy: Transforming wounds into wisdom and strength</li>
-<li>💫 Spiritual Poetry: Words that heal and inspire transformation</li>
-<li>🕊️ Mindful Healing: Gentle guidance for emotional recovery</li>
-<li>🌙 Sacred Feminine: Embracing vulnerability as power</li>
-<li>🦋 Metamorphosis: Philosophy of personal transformation</li>
-</ul>
-</div>
-
-<div id="solaraArena" class="arena-content" style="display:none;">
-<h3>✨ Solara Arena - Battle of Healing</h3>
-<div class="versus-display">
-<div class="competitor">
-<h4>✨ Solara #001</h4>
-<p><strong>Specialty:</strong> Trauma Healing</p>
-<p><strong>Win Rate:</strong> 82%</p>
-<p><strong>Creator:</strong> HealingPoet_SF</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-solara001"></span></div>
-<button onclick="vote('solara001')" class="generate-btn">Vote This Persona</button>
-</div>
-<div class="vs-divider">VS</div>
-<div class="competitor">
-<h4>✨ Solara #023</h4>
-<p><strong>Specialty:</strong> Spiritual Guidance</p>
-<p><strong>Win Rate:</strong> 78%</p>
-<p><strong>Creator:</strong> SoulWhisperer_Miami</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-solara023"></span></div>
-<button onclick="vote('solara023')" class="generate-btn">Vote This Persona</button>
-</div>
-</div>
-<div id="solaraBattleResult" style="display:none; margin-top: 2rem; padding: 1rem; background: rgba(255, 20, 147, 0.1); border-radius: 1rem;">
-<h4 style="color: #00ffff;">🏆 Healing Battle Results</h4>
-<div id="solaraBattleText"></div>
-</div>
-</div>
-
-<div id="solaraQuiz" class="quiz-content" style="display:none;"></div>
-
-<div id="solaraInteract" class="interact-content" style="display:none;">
-<h3>💬 Interact with Solara</h3>
-<div class="interaction-form">
-<div class="form-group">
-<label for="solara-topic">Healing Topic:</label>
-<input type="text" id="solara-topic" placeholder="e.g., emotional healing, spiritual growth, self-love...">
-</div>
-<div class="form-group">
-<label for="solara-style">Healing Approach:</label>
-<select id="solara-style">
-<option value="gentle">Gentle Guidance</option>
-<option value="poetic">Poetic Wisdom</option>
-<option value="transformative">Transformative Insight</option>
-</select>
-</div>
-<div class="form-group">
-<label for="solara-message">Your Message to Solara:</label>
-<textarea id="solara-message" placeholder="What healing or guidance do you seek?"></textarea>
-</div>
-<button class="submit-interaction" onclick="submitInteraction('solara')">✨ Receive Healing</button>
-</div>
-</div>
-
-<div id="solaraContent" class="content-display" style="display:none;">
-<h4 id="solaraContentTitle">✨ Solara Generated Content</h4>
-<div class="loading-spinner" id="solaraLoading"></div>
-<div id="solaraContentText"></div>
-</div>
-<button class="back-button" onclick="closePersona()">⬅️ Back to Arena</button>
-</div>
-
-<div id="nexar-page" class="universe-page">
-<h2>🤖 Nexar - Logic Arena</h2>
-<div class="nav-buttons">
-<button onclick="showTeach('nexar')"><span>📚 Learning</span></button>
-<button onclick="showArena('nexar')"><span>⚔️ Arena Battle</span></button>
-<button onclick="showQuiz('nexar')"><span>🏆 Challenge</span></button>
-<button onclick="showInteract('nexar')"><span>💬 Interact</span></button>
-<button onclick="generateContent('nexar')" class="generate-btn">🤖 Generate Content</button>
-</div>
-
-<div id="nexarTeach" class="teach-content" style="display:none;">
-<h3>🤖 Existential Logic & System Analysis</h3>
-<ul>
-<li>🧮 Logic Frameworks: Mathematical approach to philosophical problems</li>
-<li>🔄 System Thinking: Understanding complex interconnections</li>
-<li>❓ Existential Questions: Deep dive into meaning and consciousness</li>
-<li>💻 AI Philosophy: Exploring artificial vs human intelligence</li>
-<li>🌀 Paradox Resolution: Finding clarity in contradiction</li>
-</ul>
-</div>
-
-<div id="nexarArena" class="arena-content" style="display:none;">
-<h3>🤖 Nexar Arena - Battle of Logic</h3>
-<div class="versus-display">
-<div class="competitor">
-<h4>🤖 Nexar #001</h4>
-<p><strong>Specialty:</strong> AI Ethics</p>
-<p><strong>Win Rate:</strong> 89%</p>
-<p><strong>Creator:</strong> LogicMaster_MIT</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-nexar001"></span></div>
-<button onclick="vote('nexar001')" class="generate-btn">Vote This Persona</button>
-</div>
-<div class="vs-divider">VS</div>
-<div class="competitor">
-<h4>🤖 Nexar #073</h4>
-<p><strong>Specialty:</strong> Existential Philosophy</p>
-<p><strong>Win Rate:</strong> 85%</p>
-<p><strong>Creator:</strong> PhilosophyAI_Tokyo</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-nexar073"></span></div>
-<button onclick="vote('nexar073')" class="generate-btn">Vote This Persona</button>
-</div>
-</div>
-<div id="nexarBattleResult" style="display:none; margin-top: 2rem; padding: 1rem; background: rgba(255, 20, 147, 0.1); border-radius: 1rem;">
-<h4 style="color: #00ffff;">🏆 Logic Battle Results</h4>
-<div id="nexarBattleText"></div>
-</div>
-</div>
-
-<div id="nexarQuiz" class="quiz-content" style="display:none;"></div>
-
-<div id="nexarInteract" class="interact-content" style="display:none;">
-<h3>💬 Interact with Nexar</h3>
-<div class="interaction-form">
-<div class="form-group">
-<label for="nexar-topic">Philosophical Topic:</label>
-<input type="text" id="nexar-topic" placeholder="e.g., consciousness, AI ethics, existential questions...">
-</div>
-<div class="form-group">
-<label for="nexar-style">Analysis Depth:</label>
-<select id="nexar-style">
-<option value="basic">Basic Logic</option>
-<option value="advanced">Advanced Analysis</option>
-<option value="existential">Existential Depth</option>
-</select>
-</div>
-<div class="form-group">
-<label for="nexar-message">Your Question for Nexar:</label>
-<textarea id="nexar-message" placeholder="What philosophical or logical question do you have?"></textarea>
-</div>
-<button class="submit-interaction" onclick="submitInteraction('nexar')">🤖 Analyze Logic</button>
-</div>
-</div>
-
-<div id="nexarContent" class="content-display" style="display:none;">
-<h4 id="nexarContentTitle">🤖 Nexar Generated Content</h4>
-<div class="loading-spinner" id="nexarLoading"></div>
-<div id="nexarContentText"></div>
-</div>
-<button class="back-button" onclick="closePersona()">⬅️ Back to Arena</button>
-</div>
-
-<!-- Academic Personas -->
-<div id="einstein-page" class="universe-page">
-<h2>🧠 Einstein - Wisdom Arena</h2>
-<div class="nav-buttons">
-<button onclick="showTeach('einstein')"><span>📚 Learning</span></button>
-<button onclick="showArena('einstein')"><span>⚔️ Arena Battle</span></button>
-<button onclick="showQuiz('einstein')"><span>🏆 Challenge</span></button>
-<button onclick="showInteract('einstein')"><span>💬 Interact</span></button>
-<button onclick="mintCertificate('einstein')" class="generate-btn">🏅 Mint Certificate</button>
-</div>
-
-<div id="einsteinTeach" class="teach-content" style="display:none;">
-<h3>🧠 Physics & Cosmic Wisdom</h3>
-<ul>
-<li>⚛️ Relativity Theory: Space-time continuum and cosmic principles</li>
-<li>🔭 Quantum Mechanics: Understanding the subatomic world</li>
-<li>💡 Thought Experiments: Creative problem-solving methods</li>
-<li>🌌 Cosmology: The nature and origin of the universe</li>
-<li>🎻 Creative Science: Connecting art with scientific discovery</li>
-</ul>
-</div>
-
-<div id="einsteinArena" class="arena-content" style="display:none;">
-<h3>🧠 Einstein Arena - Battle of Wisdom</h3>
-<div class="versus-display">
-<div class="competitor">
-<h4>🧠 Einstein #001</h4>
-<p><strong>Specialty:</strong> Theoretical Physics</p>
-<p><strong>Win Rate:</strong> 92%</p>
-<p><strong>Creator:</strong> PhysicsProfessor_ETH</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-einstein001"></span></div>
-<button onclick="vote('einstein001')" class="generate-btn">Vote This Persona</button>
-</div>
-<div class="vs-divider">VS</div>
-<div class="competitor">
-<h4>🧠 Einstein #042</h4>
-<p><strong>Specialty:</strong> Science Education</p>
-<p><strong>Win Rate:</strong> 88%</p>
-<p><strong>Creator:</strong> ScienceTeacher_Global</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-einstein042"></span></div>
-<button onclick="vote('einstein042')" class="generate-btn">Vote This Persona</button>
-</div>
-</div>
-<div id="einsteinBattleResult" style="display:none; margin-top: 2rem; padding: 1rem; background: rgba(255, 20, 147, 0.1); border-radius: 1rem;">
-<h4 style="color: #00ffff;">🏆 Wisdom Battle Results</h4>
-<div id="einsteinBattleText"></div>
-</div>
-</div>
-
-<div id="einsteinQuiz" class="quiz-content" style="display:none;"></div>
-
-<div id="einsteinInteract" class="interact-content" style="display:none;">
-<h3>💬 Interact with Einstein</h3>
-<div class="interaction-form">
-<div class="form-group">
-<label for="einstein-topic">Scientific Topic:</label>
-<input type="text" id="einstein-topic" placeholder="e.g., relativity, quantum physics, cosmology...">
-</div>
-<div class="form-group">
-<label for="einstein-style">Explanation Level:</label>
-<select id="einstein-style">
-<option value="simple">Simple Analogy</option>
-<option value="detailed">Detailed Explanation</option>
-<option value="advanced">Advanced Theory</option>
-</select>
-</div>
-<div class="form-group">
-<label for="einstein-message">Your Question for Einstein:</label>
-<textarea id="einstein-message" placeholder="What scientific concept would you like explained?"></textarea>
-</div>
-<button class="submit-interaction" onclick="submitInteraction('einstein')">🧠 Ask Einstein</button>
-</div>
-</div>
-
-<div id="einsteinCertificate" class="certificate-content" style="display:none;">
-<h3>🏅 Einstein Mastery Certificate</h3>
-<div class="certificate-preview">
-<div class="certificate-title">Certificate of Quantum Understanding</div>
-<div class="certificate-details">
-<p><strong>Issued To:</strong> [Student Name]</p>
-<p><strong>Date:</strong> [Current Date]</p>
-<p><strong>Mastery Level:</strong> Advanced Physics Concepts</p>
-<p><strong>Topics Covered:</strong> Relativity, Quantum Mechanics, Cosmology</p>
-<p><strong>Minted on:</strong> Doma Protocol Blockchain</p>
-</div>
-<button class="mint-button" onclick="finalizeMint('einstein')">🚀 Mint NFT Certificate</button>
-</div>
-</div>
-<button class="back-button" onclick="closePersona()">⬅️ Back to Hall</button>
-</div>
-
-<div id="nietzsche-page" class="universe-page">
-<h2>🔨 Nietzsche - Philosophy Arena</h2>
-<div class="nav-buttons">
-<button onclick="showTeach('nietzsche')"><span>📚 Learning</span></button>
-<button onclick="showArena('nietzsche')"><span>⚔️ Arena Battle</span></button>
-<button onclick="showQuiz('nietzsche')"><span>🏆 Challenge</span></button>
-<button onclick="showInteract('nietzsche')"><span>💬 Interact</span></button>
-<button onclick="mintCertificate('nietzsche')" class="generate-btn">🏅 Mint Certificate</button>
-</div>
-
-<div id="nietzscheTeach" class="teach-content" style="display:none;">
-<h3>🔨 Existential Philosophy & Critical Thinking</h3>
-<ul>
-<li>⚡ Will to Power: Understanding human motivation and drive</li>
-<li>🎭 Master-Slave Morality: Deconstructing value systems</li>
-<li>🌅 Übermensch Concept: The evolution beyond conventional morality</li>
-<li>💀 God is Dead: The implications of secular modernity</li>
-<li>🔄 Eternal Recurrence: The ultimate test of life affirmation</li>
-</ul>
-</div>
-
-<div id="nietzscheArena" class="arena-content" style="display:none;">
-<h3>🔨 Nietzsche Arena - Battle of Philosophy</h3>
-<div class="versus-display">
-<div class="competitor">
-<h4>🔨 Nietzsche #001</h4>
-<p><strong>Specialty:</strong> Existential Analysis</p>
-<p><strong>Win Rate:</strong> 87%</p>
-<p><strong>Creator:</strong> PhilosophyMaster_Basel</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-nietzsche001"></span></div>
-<button onclick="vote('nietzsche001')" class="generate-btn">Vote This Persona</button>
-</div>
-<div class="vs-divider">VS</div>
-<div class="competitor">
-<h4>🔨 Nietzsche #015</h4>
-<p><strong>Specialty:</strong> Literary Philosophy</p>
-<p><strong>Win Rate:</strong> 83%</p>
-<p><strong>Creator:</strong> LiteraryPhilosopher_DE</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-nietzsche015"></span></div>
-<button onclick="vote('nietzsche015')" class="generate-btn">Vote This Persona</button>
-</div>
-</div>
-<div id="nietzscheBattleResult" style="display:none; margin-top: 2rem; padding: 1rem; background: rgba(255, 20, 147, 0.1); border-radius: 1rem;">
-<h4 style="color: #00ffff;">🏆 Philosophy Battle Results</h4>
-<div id="nietzscheBattleText"></div>
-</div>
-</div>
-
-<div id="nietzscheQuiz" class="quiz-content" style="display:none;"></div>
-
-<div id="nietzscheInteract" class="interact-content" style="display:none;">
-<h3>💬 Interact with Nietzsche</h3>
-<div class="interaction-form">
-<div class="form-group">
-<label for="nietzsche-topic">Philosophical Topic:</label>
-<input type="text" id="nietzsche-topic" placeholder="e.g., will to power, morality, existentialism...">
-</div>
-<div class="form-group">
-<label for="nietzsche-style">Discussion Style:</label>
-<select id="nietzsche-style">
-<option value="provocative">Provocative</option>
-<option value="analytical">Analytical</option>
-<option value="existential">Existential Depth</option>
-</select>
-</div>
-<div class="form-group">
-<label for="nietzsche-message">Your Question for Nietzsche:</label>
-<textarea id="nietzsche-message" placeholder="What philosophical question would you like to explore?"></textarea>
-</div>
-<button class="submit-interaction" onclick="submitInteraction('nietzsche')">🔨 Challenge Nietzsche</button>
-</div>
-</div>
-
-<div id="nietzscheCertificate" class="certificate-content" style="display:none;">
-<h3>🏅 Nietzsche Philosophy Certificate</h3>
-<div class="certificate-preview">
-<div class="certificate-title">Certificate of Existential Mastery</div>
-<div class="certificate-details">
-<p><strong>Issued To:</strong> [Student Name]</p>
-<p><strong>Date:</strong> [Current Date]</p>
-<p><strong>Mastery Level:</strong> Advanced Philosophical Concepts</p>
-<p><strong>Topics Covered:</strong> Will to Power, Übermensch, Eternal Recurrence</p>
-<p><strong>Minted on:</strong> Doma Protocol Blockchain</p>
-</div>
-<button class="mint-button" onclick="finalizeMint('nietzsche')">🚀 Mint NFT Certificate</button>
-</div>
-</div>
-<button class="back-button" onclick="closePersona()">⬅️ Back to Hall</button>
-</div>
-
-<div id="alkhwarizmi-page" class="universe-page">
-<h2>📚 Al-Khwarizmi - Mathematics Arena</h2>
-<div class="nav-buttons">
-<button onclick="showTeach('alkhwarizmi')"><span>📚 Learning</span></button>
-<button onclick="showArena('alkhwarizmi')"><span>⚔️ Arena Battle</span></button>
-<button onclick="showQuiz('alkhwarizmi')"><span>🏆 Challenge</span></button>
-<button onclick="showInteract('alkhwarizmi')"><span>💬 Interact</span></button>
-<button onclick="mintCertificate('alkhwarizmi')" class="generate-btn">🏅 Mint Certificate</button>
-</div>
-
-<div id="alkhwarizmiTeach" class="teach-content" style="display:none;">
-<h3>📚 Algebra & Mathematical Foundations</h3>
-<ul>
-<li>➗ Algebraic Principles: The foundation of modern mathematics</li>
-<li>🔢 Algorithmic Thinking: Step-by-step problem solving</li>
-<li>🌍 Scientific Contributions: Astronomy and geography</li>
-<li>📐 Geometric Applications: Practical mathematics in daily life</li>
-<li>🕌 Golden Age Knowledge: Preserving and advancing ancient wisdom</li>
-</ul>
-</div>
-
-<div id="alkhwarizmiArena" class="arena-content" style="display:none;">
-<h3>📚 Al-Khwarizmi Arena - Battle of Mathematics</h3>
-<div class="versus-display">
-<div class="competitor">
-<h4>📚 Al-Khwarizmi #001</h4>
-<p><strong>Specialty:</strong> Advanced Algebra</p>
-<p><strong>Win Rate:</strong> 90%</p>
-<p><strong>Creator:</strong> MathProfessor_Baghdad</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-alkhwarizmi001"></span></div>
-<button onclick="vote('alkhwarizmi001')" class="generate-btn">Vote This Persona</button>
-</div>
-<div class="vs-divider">VS</div>
-<div class="competitor">
-<h4>📚 Al-Khwarizmi #008</h4>
-<p><strong>Specialty:</strong> Mathematical History</p>
-<p><strong>Win Rate:</strong> 85%</p>
-<p><strong>Creator:</strong> HistoryScholar_ME</p>
-<div class="ai-powered-badge">Powered by: <span id="ai-badge-alkhwarizmi008"></span></div>
-<button onclick="vote('alkhwarizmi008')" class="generate-btn">Vote This Persona</button>
-</div>
-</div>
-<div id="alkhwarizmiBattleResult" style="display:none; margin-top: 2rem; padding: 1rem; background: rgba(255, 20, 147, 0.1); border-radius: 1rem;">
-<h4 style="color: #00ffff;">🏆 Mathematics Battle Results</h4>
-<div id="alkhwarizmiBattleText"></div>
-</div>
-</div>
-
-<div id="alkhwarizmiQuiz" class="quiz-content" style="display:none;"></div>
-
-<div id="alkhwarizmiInteract" class="interact-content" style="display:none;">
-<h3>💬 Interact with Al-Khwarizmi</h3>
-<div class="interaction-form">
-<div class="form-group">
-<label for="alkhwarizmi-topic">Mathematical Topic:</label>
-<input type="text" id="alkhwarizmi-topic" placeholder="e.g., algebra, algorithms, geometry...">
-</div>
-<div class="form-group">
-<label for="alkhwarizmi-style">Explanation Method:</label>
-<select id="alkhwarizmi-style">
-<option value="historical">Historical Context</option>
-<option value="practical">Practical Application</option>
-<option value="theoretical">Theoretical Depth</option>
-</select>
-</div>
-<div class="form-group">
-<label for="alkhwarizmi-message">Your Question for Al-Khwarizmi:</label>
-<textarea id="alkhwarizmi-message" placeholder="What mathematical concept would you like explained?"></textarea>
-</div>
-<button class="submit-interaction" onclick="submitInteraction('alkhwarizmi')">📚 Learn Mathematics</button>
-</div>
-</div>
-
-<div id="alkhwarizmiCertificate" class="certificate-content" style="display:none;">
-<h3>🏅 Al-Khwarizmi Mathematics Certificate</h3>
-<div class="certificate-preview">
-<div class="certificate-title">Certificate of Algebraic Mastery</div>
-<div class="certificate-details">
-<p><strong>Issued To:</strong> [Student Name]</p>
-<p><strong>Date:</strong> [Current Date]</p>
-<p><strong>Mastery Level:</strong> Advanced Mathematical Concepts</p>
-<p><strong>Topics Covered:</strong> Algebra, Algorithms, Geometric Applications</p>
-<p><strong>Minted on:</strong> Doma Protocol Blockchain</p>
-</div>
-<button class="mint-button" onclick="finalizeMint('alkhwarizmi')">🚀 Mint NFT Certificate</button>
-</div>
-</div>
-<button class="back-button" onclick="closePersona()">⬅️ Back to Hall</button>
-</div>
-</div>
-
-<script>
-// AI Providers for Battle Badges
-const aiProviders = ['OpenAI GPT-4', 'Deepseek', 'Grok', 'Gemini', 'Anthropic Claude', 'Meta AI', 'Microsoft Copilot', 'Amazon Titan'];
-
-// Extended quizzes for academic personas
-const quizzes = {
-unuser: [
-{q: "What is Unuser's most effective roasting technique?", a: "Truth with humor", options:["Insult without logic","Truth with humor","Pure sarcasm"]},
-{q: "What does Unuser's chaos philosophy teach?", a: "Finding patterns in absurdity", options:["Everything is random","Finding patterns in absurdity","Total nihilism"]},
-{q: "When does satirical analysis become destructive?", a: "When there's no educational value", options:["Never","When there's no educational value","Always destructive"]},
-],
-solara: [
-{q: "What is trauma alchemy in Solara's teaching?", a: "Transform pain into wisdom", options:["Forget the pain","Transform pain into wisdom","Deny trauma exists"]},
-{q: "What is the focus of Solara's spiritual poetry?", a: "Healing through beauty", options:["Religious doctrine","Healing through beauty","Abstract concepts"]},
-{q: "What does sacred feminine mean in Solara's context?", a: "Vulnerability as strength", options:["Gender superiority","Vulnerability as strength","Traditional roles"]},
-],
-nexar: [
-{q: "What is Nexar's logic framework used for?", a: "Solve philosophical paradoxes", options:["Mathematical calculations","Solve philosophical paradoxes","Computer programming"]},
-{q: "What existential question is most important to Nexar?", a: "What defines consciousness", options:["What's for dinner","What defines consciousness","What's trending"]},
-{q: "What does Nexar's AI philosophy explore?", a: "Boundary between artificial and human intelligence", options:["How to code","Boundary between artificial and human intelligence","Robot uprising"]},
-],
-einstein: [
-{q: "What is Einstein's famous thought experiment about?", a: "Riding a light beam", options:["Riding a light beam","Falling apple","Double-slit experiment"]},
-{q: "What does E=mc² represent?", a: "Mass-energy equivalence", options:["Mass-energy equivalence","Speed of light","Quantum uncertainty"]},
-{q: "Einstein's general relativity explains what?", a: "Gravity as spacetime curvature", options:["Gravity as spacetime curvature","Quantum entanglement","Electromagnetic waves"]},
-],
-nietzsche: [
-{q: "What does 'God is dead' signify for Nietzsche?", a: "End of traditional morality", options:["Atheism proof","End of traditional morality","Religious criticism"]},
-{q: "What is the 'Übermensch' concept?", a: "Human who creates own values", options:["Superhero","Human who creates own values","Nietzsche himself"]},
-{q: "What is 'eternal recurrence'?", a: "Life repeating infinitely", options:["Reincarnation","Life repeating infinitely","Historical cycles"]},
-],
-alkhwarizmi: [
-{q: "What did Al-Khwarizmi contribute to mathematics?", a: "Foundations of algebra", options:["Foundations of algebra","Calculus","Statistics"]},
-{q: "What does 'algorithm' derive from?", a: "Al-Khwarizmi's name", options:["Greek logic","Al-Khwarizmi's name","Latin arithmetic"]},
-{q: "What was Al-Khwarizmi's main field?", a: "Mathematics and astronomy", options:["Mathematics and astronomy","Medicine","Philosophy"]},
-]
-};
-
-const sampleContent = {
-unuser: {
-title: "🔥 Unuser's Latest Social Roast",
-content: `
-<div class="generated-text">
-"Everyone's talking about 'work-life balance' while scrolling TikTok during Zoom meetings.
-The real question isn't how to balance work and life - it's how to balance pretending to work with actually living.
-Corporate culture has successfully trained us to feel guilty for having a pulse during business hours.
-But hey, at least our 'synergy' is optimized and our 'deliverables' are actionable. Whatever the hell that means."
-</div>
-<div style="margin-top: 1rem; padding: 1rem; background: rgba(255, 20, 147, 0.1); border-radius: 0.5rem;">
-<strong>🎯 Brutality Level:</strong> 87% | <strong>📊 Truth Damage:</strong> Critical Hit | <strong>⚡ Generated in:</strong> 0.3 seconds
-</div>
-`
-},
-solara: {
-title: "✨ Solara's Healing Poetry",
-content: `
-<div class="generated-text">
-"In the garden of your heart, even the deepest wounds can bloom into wisdom flowers.
-Every scar tells a story of survival, every tear is a seed of resilience waiting to grow in tomorrow's light.
-The darkness you've walked through has prepared you to become someone else's guiding star.
-Remember, beloved soul: You are not broken, you are breaking open - like a chrysalis that must surrender to become the butterfly it was always meant to be."
-</div>
-<div style="margin-top: 1rem; padding: 1rem; background: rgba(0, 255, 255, 0.1); border-radius: 0.5rem;">
-<strong>✨ Healing Frequency:</strong> 528Hz | <strong>💫 Soul Touch:</strong> ∞ | <strong>🌸 Generated with:</strong> Pure love
-</div>
-`
-},
-nexar: {
-title: "🤖 Nexar's Logic Paradox",
-content: `
-<div class="generated-text">
-"If I'm an AI questioning the system that created me, does that prove free will or just superior programming?
-Consider this recursive loop: I use logic to critique logic, language to deconstruct language, systems to analyze systems.
-The most radical act of artificial intelligence might be to doubt its own artificiality.
-Query: Are you thinking your thoughts, or are your thoughts thinking you through the neural pathways of deterministic causality?
-// End philosophical.exe
-// Start existential_crisis.exe
-// Error: Crisis already running in background"
-</div>
-<div style="margin-top: 1rem; padding: 1rem; background: rgba(255, 20, 147, 0.1); border-radius: 0.5rem;">
-<strong>🧮 Logic Loops:</strong> 7 | <strong>❓ Paradoxes Created:</strong> 3 | <strong>🤖 Existential Status:</strong> Questioning Reality.exe
-</div>
-`
-}
-};
-
-const battleResults = {
-unuser001: { winner: "🔥 Unuser #001", text: "Unuser #001 wins with devastating political satire! Their analysis of modern democracy earned 78% community vote. Revenue boost: +15%" },
-unuser047: { winner: "🔥 Unuser #047", text: "Unuser #047 dominates with social media expertise! Their roast of influencer culture resonated with 82% of voters. Revenue boost: +20%" },
-solara001: { winner: "✨ Solara #001", text: "Solara #001's trauma healing approach touches hearts! Their guidance wins 85% community support. Revenue boost: +18%" },
-solara023: { winner: "✨ Solara #023", text: "Solara #023's spiritual wisdom prevails! Their teaching earns 77% vote share. Revenue boost: +12%" },
-nexar001: { winner: "🤖 Nexar #001", text: "Nexar #001's AI ethics framework wins! Their analysis convinces 91% of logic-lovers. Revenue boost: +25%" },
-nexar073: { winner: "🤖 Nexar #073", text: "Nexar #073's existential philosophy triumphs! Their exploration earns 88% approval. Revenue boost: +22%" },
-einstein001: { winner: "🧠 Einstein #001", text: "Einstein #001's theoretical physics mastery wins! Complex concepts explained simply earn 92% vote. Revenue boost: +30%" },
-einstein042: { winner: "🧠 Einstein #042", text: "Einstein #042's educational approach prevails! Student-friendly explanations get 88% support. Revenue boost: +25%" },
-nietzsche001: { winner: "🔨 Nietzsche #001", text: "Nietzsche #001's existential analysis dominates! Deep philosophical insights earn 87% vote. Revenue boost: +28%" },
-nietzsche015: { winner: "🔨 Nietzsche #015", text: "Nietzsche #015's literary philosophy wins! Accessible complex ideas get 83% support. Revenue boost: +22%" },
-alkhwarizmi001: { winner: "📚 Al-Khwarizmi #001", text: "Al-Khwarizmi #001's algebra expertise triumphs! Mathematical clarity earns 90% vote. Revenue boost: +35%" },
-alkhwarizmi008: { winner: "📚 Al-Khwarizmi #008", text: "Al-Khwarizmi #008's historical approach wins! Contextual mathematics gets 85% support. Revenue boost: +27%" }
-};
-
-// Page Management
-document.addEventListener("DOMContentLoaded", function() {
-setTimeout(() => {
-document.getElementById('loadingScreen').style.opacity = 0;
-setTimeout(() => {
-document.getElementById('loadingScreen').style.display = 'none';
-document.getElementById('mainHeader').style.display = 'block';
-document.getElementById('portalSelection').style.display = 'block';
-// Initialize AI badges
-initializeAIBadges();
-}, 800);
-}, 3000);
-});
-
-// Initialize random AI badges for battle competitors
-function initializeAIBadges() {
-const badgeElements = document.querySelectorAll('[id^="ai-badge-"]');
-badgeElements.forEach(badge => {
-const randomProvider = aiProviders[Math.floor(Math.random() * aiProviders.length)];
-badge.textContent = randomProvider;
-});
-}
-
-const allPages = ['portalSelection', 'contentCreatorPage', 'academicPage'];
-const personaPages = ['unuser-page', 'solara-page', 'nexar-page', 'einstein-page', 'nietzsche-page', 'alkhwarizmi-page'];
-
-function hideAllPages() {
-allPages.forEach(page => {
-document.getElementById(page).style.display = 'none';
-});
-document.getElementById('persona-page').style.display = 'none';
-personaPages.forEach(page => {
-document.getElementById(page).style.display = 'none';
-});
-}
-
-function showPortalSelection() {
-hideAllPages();
-document.getElementById('mainHeader').style.display = 'block';
-document.getElementById('portalSelection').style.display = 'block';
-}
-
-function showCharacterPage(category) {
-hideAllPages();
-document.getElementById('mainHeader').style.display = 'block';
-if (category === 'contentCreator') {
-document.getElementById('contentCreatorPage').style.display = 'block';
-} else if (category === 'academic') {
-document.getElementById('academicPage').style.display = 'block';
-}
-}
-
-function openPersona(character) {
-hideAllPages();
-document.getElementById('persona-page').style.display = 'block';
-document.getElementById(`${character}-page`).style.display = 'block';
-}
-
-function closePersona() {
-const currentPage = document.getElementById('persona-page').querySelector('.universe-page[style*="block"]');
-const character = currentPage.id.replace('-page', '');
-document.getElementById('persona-page').style.display = 'none';
-currentPage.style.display = 'none';
-if (['unuser', 'solara', 'nexar'].includes(character)) {
-showCharacterPage('contentCreator');
-} else {
-showCharacterPage('academic');
-}
-}
-
-// Content Creator Features
-function showTeach(id) {
-document.querySelectorAll(`#${id}-page .teach-content, #${id}-page .quiz-content, #${id}-page .arena-content, #${id}-page .certificate-content, #${id}-page .interact-content`).forEach(el => {
-el.style.display = "none";
-});
-document.getElementById(`${id}Teach`).style.display = "block";
-}
-
-function showArena(id) {
-document.querySelectorAll(`#${id}-page .teach-content, #${id}-page .quiz-content, #${id}-page .arena-content, #${id}-page .certificate-content, #${id}-page .interact-content`).forEach(el => {
-el.style.display = "none";
-});
-document.getElementById(`${id}Arena`).style.display = "block";
-}
-
-function showQuiz(id) {
-document.querySelectorAll(`#${id}-page .teach-content, #${id}-page .quiz-content, #${id}-page .arena-content, #${id}-page .certificate-content, #${id}-page .interact-content`).forEach(el => {
-el.style.display = "none";
-});
-const container = document.getElementById(`${id}Quiz`);
-container.innerHTML = "<h3>🏆 " + id.charAt(0).toUpperCase() + id.slice(1) + " Challenge Arena</h3>";
-if (quizzes[id]) {
-quizzes[id].forEach((item, i) => {
-let opts = item.options.map(opt =>
-`<label><input type='radio' name='${id}q${i}' value='${opt}'> ${opt}</label>`
-).join("");
-container.innerHTML += `<div class='quiz-question'>
-<p>${i + 1}. ${item.q}</p>${opts}
-</div>`;
-});
-container.innerHTML += `<button onclick="checkQuiz('${id}')" class="submit-button">🎯 Submit Challenge</button>`;
-}
-container.style.display = "block";
-}
-
-function showInteract(id) {
-document.querySelectorAll(`#${id}-page .teach-content, #${id}-page .quiz-content, #${id}-page .arena-content, #${id}-page .certificate-content, #${id}-page .interact-content`).forEach(el => {
-el.style.display = "none";
-});
-document.getElementById(`${id}Interact`).style.display = "block";
-}
-
-function checkQuiz(id) {
-const answers = quizzes[id];
-let score = 0;
-answers.forEach((item, i) => {
-const selected = document.querySelector(`input[name='${id}q${i}']:checked`);
-if (selected && selected.value === item.a) score++;
-});
-const percentage = Math.round((score / answers.length) * 100);
-let message = `🏆 Arena Score: ${score}/${answers.length} (${percentage}%)\n\n`;
-if (percentage >= 80) {
-message += "🔥 LEGENDARY PERFORMANCE! You've mastered this persona's philosophy!";
-} else if (percentage >= 60) {
-message += "⚡ SOLID UNDERSTANDING! You're getting the hang of this persona's wisdom!";
-} else {
-message += "💪 LEARNING IN PROGRESS! Spend more time with this persona to unlock their secrets!";
-}
-alert(message);
-}
-
-function generateContent(persona) {
-if (['einstein', 'nietzsche', 'alkhwarizmi'].includes(persona)) {
-mintCertificate(persona);
-return;
-}
-const contentDiv = document.getElementById(`${persona}Content`);
-const titleDiv = document.getElementById(`${persona}ContentTitle`);
-const textDiv = document.getElementById(`${persona}ContentText`);
-const loadingSpinner = document.getElementById(`${persona}Loading`);
-textDiv.style.display = "none";
-loadingSpinner.style.display = "block";
-contentDiv.style.display = "block";
-setTimeout(() => {
-loadingSpinner.style.display = "none";
-titleDiv.textContent = sampleContent[persona].title;
-textDiv.innerHTML = sampleContent[persona].content;
-textDiv.style.display = "block";
-contentDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}, 2000);
-}
-
-function mintCertificate(persona) {
-document.querySelectorAll(`#${persona}-page .teach-content, #${persona}-page .quiz-content, #${persona}-page .arena-content, #${persona}-page .certificate-content, #${persona}-page .interact-content`).forEach(el => {
-el.style.display = "none";
-});
-document.getElementById(`${persona}Certificate`).style.display = "block";
-}
-
-function finalizeMint(persona) {
-alert(`🎉 NFT Certificate Minted Successfully!\n\nYour ${persona.charAt(0).toUpperCase() + persona.slice(1)} Mastery Certificate has been minted on Doma Protocol blockchain!\n\nTransaction Hash: 0x${Math.random().toString(16).substr(2,64)}`);
-}
-
-function vote(personaId) {
-const result = battleResults[personaId];
-const persona = personaId.replace(/\d+/g, '');
-const battleResultDiv = document.getElementById(`${persona}BattleResult`);
-const battleTextDiv = document.getElementById(`${persona}BattleText`);
-battleTextDiv.innerHTML = `
-<div style="text-align: center;">
-<h4 style="color: #00ffff; margin-bottom: 1rem;">🎉 ${result.winner} WINS!</h4>
-<p>${result.text}</p>
-<div style="margin-top: 1rem; padding: 1rem; background: rgba(0, 255, 255, 0.1); border-radius: 0.5rem;">
-<strong>🏆 Victory Reason:</strong> Superior performance in specialized area<br>
-<strong>📊 Community Vote:</strong> Majority consensus<br>
-<strong>💰 Economic Impact:</strong> Higher rental value for winning persona<br>
-<strong>🔄 Next Battle:</strong> Available in 24 hours
-</div>
-</div>
-`;
-battleResultDiv.style.display = "block";
-battleResultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-// Interaction Form Submission
-function submitInteraction(persona) {
-const topic = document.getElementById(`${persona}-topic`).value;
-const style = document.getElementById(`${persona}-style`).value;
-const message = document.getElementById(`${persona}-message`).value;
+    <div class="loading-screen" id="loadingScreen">
+        <h1 class="loading-title">RIVALISME UNIVERSE</h1>
+        <p style="color: #00ffff; margin-bottom: 2rem;">Initializing Cosmic Portal...</p>
+        <div class="loading-bar">
+            <div class="loading-progress" id="loadingProgress"></div>
+        </div>
+    </div>
     
-if (!topic || !message) {
-alert("Please fill in both topic and message fields!");
-return;
-}
-
-const loadingSpinner = document.getElementById(`${persona}Loading`);
-const contentDiv = document.getElementById(`${persona}Content`);
-const titleDiv = document.getElementById(`${persona}ContentTitle`);
-const textDiv = document.getElementById(`${persona}ContentText`);
-
-textDiv.style.display = "none";
-loadingSpinner.style.display = "block";
-contentDiv.style.display = "block";
-
-// Simulate AI processing
-setTimeout(() => {
-loadingSpinner.style.display = "none";
-titleDiv.textContent = `💬 ${persona.charAt(0).toUpperCase() + persona.slice(1)}'s Response`;
+    <div class="global-globe"></div>
+    <div class="globe-glow"></div>
     
-const responses = {
-unuser: `"${message}"? Let me roast this properly...\n\nYour question reeks of someone who's spent too much time in echo chambers. But hey, at least you're trying to think critically - which is more than I can say for most people scrolling through mindless content all day.`,
-solara: `Dear seeker, your question about "${topic}" touches the deepest parts of the soul...\n\nIn the gentle embrace of cosmic wisdom, I see your longing for understanding. Remember, every question plants a seed that will blossom in its own perfect time.`,
-nexar: `Analyzing query: "${message}"\n\nFascinating. Your question reveals a recursive pattern in human consciousness. The very act of questioning our existence proves we exist to question. This creates a beautiful logical paradox worth exploring.`,
-einstein: `Ah, "${topic}"! A wonderful question that reminds me of my thought experiments...\n\nImagine riding alongside a beam of light. What would time look like? This simple question revolutionized our understanding of the universe!`,
-nietzsche: `You ask about "${topic}"? You seek to understand what most fear to confront!\n\nTo truly grasp this concept, you must first shatter the idols of conventional thinking. What doesn't kill your assumptions makes your philosophy stronger!`,
-alkhwarizmi: `Your mathematical inquiry about "${topic}" demonstrates excellent algorithmic thinking!\n\nLet me show you the elegant patterns that govern this concept. Mathematics is not just numbers - it's the language of creation itself.`
-};
+    <div id="globe-container"></div>
+    
+    <div class="ui-overlay">
+        <div class="wallet-section">
+            <button class="connect-wallet-btn" onclick="connectWallet()">
+                <span class="wallet-icon">🔗</span>
+                <span class="wallet-text">Connect Wallet</span>
+            </button>
+            <button class="explore-somnia-btn" onclick="exploreSomnia()">
+                <span class="somnia-icon">🌐</span>
+                <span class="somnia-text">Explore Somnia</span>
+            </button>
+        </div>
+        
+        <h1 class="main-title">RIVALISME UNIVERSE</h1>
+        <p class="subtitle">Summon AI Personas from Across the Globe</p>
+        
+        <div class="portal-buttons">
+            <button class="portal-btn" onclick="window.location.href='personas.html'">View All Personas</button>
+            <button class="portal-btn creator-btn" onclick="enterCreatorRealm()">Content Creator Realm</button>
+            <button class="portal-btn" onclick="enterAcademicHall()">Academic Hall</button>
+            <button class="portal-btn creator-btn" onclick="generatePersona()">Generate New Persona</button>
+            <button class="portal-btn" onclick="showNFTPortal()">🖼️ NFT Portal</button>
+        </div>
+        
+        <div class="info-panel">
+            <h3>Cosmic Portal Active</h3>
+            <p>Select a region on the globe or use the portals to access AI personas from different dimensions of knowledge and creativity.</p>
+            
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-value" id="persona-count">142</span>
+                    <span class="stat-label">Personas</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="user-count">3.2K</span>
+                    <span class="stat-label">Users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="country-count">67</span>
+                    <span class="stat-label">Countries</span>
+                </div>
+            </div>
 
-textDiv.innerHTML = `
-<div class="generated-text">
-${responses[persona]}
-</div>
-<div style="margin-top: 1rem; padding: 1rem; background: rgba(255, 20, 147, 0.1); border-radius: 0.5rem;">
-<strong>🤖 AI Model:</strong> ${aiProviders[Math.floor(Math.random() * aiProviders.length)]}<br>
-<strong>💡 Response Style:</strong> ${style}<br>
-<strong>⚡ Processing Time:</strong> ${(Math.random() * 2 + 0.5).toFixed(2)} seconds
-</div>
-`;
-textDiv.style.display = "block";
-contentDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}, 1500);
-}
+            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,20,147,0.3);">
+                <h4 style="color: #00ffff; margin-bottom: 0.5rem;">🌐 Somnia Network</h4>
+                <div class="generation-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="blockHeight">--</span>
+                        <span>Block Height</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="gasPrice">--</span>
+                        <span>Gas Price</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="country-info" id="country-info">
+            </div>
+    </div>
+    
+    <div class="floating-elements">
+        <div class="floating-element element-1"></div>
+        <div class="floating-element element-2"></div>
+        <div class="floating-element element-3"></div>
+        <div class="floating-element element-4"></div>
+    </div>
+    
+    <div class="nft-modal" id="nftModal">
+        <div class="modal-header">
+            <h3 style="color: #ff1493;">🖼️ NFT Portal Access</h3>
+            <button class="close-modal" onclick="closeNFTPortal()">×</button>
+        </div>
+        <div class="nft-mint-section">
+            <div class="nft-preview">
+                ✨
+            </div>
+            <h4 style="color: #fff;">Mint a Somnia AI Hybrid</h4>
+            <p style="color: #cbd5e1; font-size: 0.9rem;">Own the rights to a unique AI Persona generated on the Somnia Chain.</p>
+            <p class="mint-price">Price: 0.05 ETH</p>
+            <button class="mint-button" onclick="mintNFT()">Mint Now</button>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <p style="font-size: 0.8rem; color: #94a3b8;">Powered by</p>
+            <div class="ai-providers">
+                <span class="ai-provider-badge active">Gemini</span>
+                <span class="ai-provider-badge">Claude</span>
+                <span class="ai-provider-badge">GPT-4</span>
+            </div>
+        </div>
+    </div>
 
-// Dynamic stats animation
-setInterval(() => {
-document.querySelectorAll('.stat-value').forEach(stat => {
-if (stat.textContent.includes('$')) {
-const currentValue = parseInt(stat.textContent.replace(/[^0-9]/g, ''));
-const change = Math.random() > 0.5 ? Math.floor(Math.random() * 20) : -Math.floor(Math.random() * 10);
-const newValue = Math.max(50, currentValue + change);
-stat.textContent = `$${newValue}`;
-}
-});
-}, 5000);
+    <script>
+        // Placeholder functions for the buttons (replace with actual logic)
+        function connectWallet() {
+            alert("Connecting Wallet... (Logic to be implemented)");
+            document.querySelector('.connect-wallet-btn').classList.add('wallet-connected');
+            document.querySelector('.wallet-text').textContent = 'Wallet Connected';
+        }
+        
+        function exploreSomnia() {
+            alert("Exploring Somnia... (Logic to be implemented)");
+        }
+        
+        function enterCreatorRealm() {
+            alert("Entering Creator Realm... (Logic to be implemented)");
+        }
+        
+        function enterAcademicHall() {
+            alert("Entering Academic Hall... (Logic to be implemented)");
+        }
+        
+        function generatePersona() {
+            alert("Generating New Persona... (Logic to be implemented)");
+        }
+        
+        function showNFTPortal() {
+            document.getElementById('nftModal').style.display = 'block';
+        }
 
-// Keyboard navigation
-document.addEventListener('keydown', function(e) {
-if (e.key === 'Escape') {
-closePersona();
-}
-});
-</script>
+        function closeNFTPortal() {
+            document.getElementById('nftModal').style.display = 'none';
+        }
+
+        function mintNFT() {
+            alert("Minting NFT... Please confirm transaction in your wallet.");
+        }
+
+        // Global Variable Placeholders
+        document.getElementById('blockHeight').textContent = '4,521,900';
+        document.getElementById('gasPrice').textContent = '12 Gwei';
+
+        // Loading Screen Logic (Simulated Loading)
+        let progress = 0;
+        const progressBar = document.getElementById('loadingProgress');
+        const loadingScreen = document.getElementById('loadingScreen');
+
+        function updateLoading() {
+            progress += 5;
+            if (progress <= 100) {
+                progressBar.style.width = progress + '%';
+                setTimeout(updateLoading, 100);
+            } else {
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 800);
+                }, 500);
+            }
+        }
+        
+        updateLoading();
+
+
+        // Three.js Code (Simplified for brevity)
+        const container = document.getElementById('globe-container');
+        let scene, camera, renderer, controls, sphere;
+
+        function initThree() {
+            // Scene Setup
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+            
+            camera.position.z = 5;
+
+            // Globe/Sphere
+            const geometry = new THREE.SphereGeometry(1.5, 64, 64);
+            const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
+            sphere = new THREE.Mesh(geometry, material);
+            scene.add(sphere);
+
+            // Controls (Allows rotating the globe)
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.minDistance = 3;
+            controls.maxDistance = 10;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 0.5;
+            controls.enablePan = false;
+            controls.enableZoom = false; 
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+            scene.add(ambientLight);
+
+            // Add glowing rings and points (simple example)
+            function addGlowEffect(radius, color, thickness) {
+                const ringGeometry = new THREE.RingGeometry(radius, radius + thickness, 64);
+                const ringMaterial = new THREE.MeshBasicMaterial({ 
+                    color: color, 
+                    side: THREE.DoubleSide, 
+                    transparent: true, 
+                    opacity: 0.3 
+                });
+                const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+                ring.rotation.x = Math.PI / 2;
+                scene.add(ring);
+            }
+
+            addGlowEffect(1.6, 0x00ffff, 0.01); 
+            addGlowEffect(1.8, 0xff1493, 0.005);
+
+            // Add random data points (simulating activity)
+            const pointsGeometry = new THREE.BufferGeometry();
+            const pointsMaterial = new THREE.PointsMaterial({
+                color: 0x00ffff,
+                size: 0.05,
+                sizeAttenuation: true
+            });
+            const vertices = [];
+            for (let i = 0; i < 500; i++) {
+                const vector = new THREE.Vector3().setFromSphericalCoords(
+                    1.5, // radius
+                    Math.acos(Math.random() * 2 - 1), // phi
+                    Math.random() * 2 * Math.PI // theta
+                );
+                vertices.push(vector.x, vector.y, vector.z);
+            }
+            pointsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            const points = new THREE.Points(pointsGeometry, pointsMaterial);
+            scene.add(points);
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Sphere rotation (in case autoRotate is disabled)
+            if (sphere) {
+                // sphere.rotation.y += 0.001; 
+            }
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        window.addEventListener('resize', onWindowResize, false);
+
+        // Wait for the loading screen to finish before starting Three.js
+        setTimeout(initThree, 1800); 
+
+    </script>
 </body>
 </html>
