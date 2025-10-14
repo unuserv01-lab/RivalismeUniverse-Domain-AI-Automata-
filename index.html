@@ -355,7 +355,7 @@
             align-items: center;
         }
 
-        .connect-wallet-btn, .explore-somnia-btn {
+        .connect-wallet-btn, .explore-doma-btn {
             padding: 0.8rem 1.5rem;
             border: 2px solid #00ffff;
             background: rgba(0, 255, 255, 0.1);
@@ -368,7 +368,7 @@
             backdrop-filter: blur(10px);
         }
 
-        .connect-wallet-btn:hover, .explore-somnia-btn:hover {
+        .connect-wallet-btn:hover, .explore-doma-btn:hover {
             background: #00ffff;
             color: #000;
             box-shadow: 0 0 30px #00ffff;
@@ -568,31 +568,156 @@
             cursor: pointer;
         }
 
-        /* Responsive Design */
+        /* Persona Generation Modal */
+        .persona-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 20, 147, 0.3);
+            z-index: 1000;
+            display: none;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 0 50px rgba(255, 20, 147, 0.5);
+        }
+
+        .persona-modal h3 {
+            color: #00ffff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .persona-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 20, 147, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1.5rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .persona-input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .persona-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .persona-option {
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .persona-option:hover {
+            background: rgba(255, 20, 147, 0.2);
+            border-color: #ff1493;
+        }
+
+        .persona-option.active {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn.generate {
+            background: rgba(255, 20, 147, 0.2);
+            border-color: #ff1493;
+            color: #ff1493;
+        }
+
+        .modal-btn.generate:hover {
+            background: #ff1493;
+            color: #000;
+            box-shadow: 0 0 20px #ff1493;
+        }
+
+        .modal-btn.cancel {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .modal-btn.cancel:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
+        }
+
+        /* Responsive Design - IMPROVED FOR MOBILE */
         @media (max-width: 768px) {
             .main-title {
-                font-size: 2.5rem;
-                top: 5%;
+                font-size: 2rem;
+                top: 3%;
+                padding: 0 1rem;
             }
 
             .subtitle {
-                font-size: 1rem;
-                top: 15%;
+                font-size: 0.9rem;
+                top: 10%;
+                padding: 0 1rem;
             }
 
             .portal-buttons {
                 flex-direction: column;
                 align-items: center;
                 gap: 1rem;
-                bottom: 10%;
+                bottom: 5%;
+                padding: 0 1rem;
+            }
+
+            .portal-btn {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 280px;
             }
 
             .info-panel, .country-info {
                 position: relative;
                 width: 90%;
-                margin: 2rem auto;
+                margin: 1rem auto;
                 right: auto;
                 left: auto;
+                top: auto;
+                transform: none;
             }
 
             .wallet-section {
@@ -600,17 +725,122 @@
                 top: auto;
                 right: auto;
                 justify-content: center;
-                margin-bottom: 2rem;
+                margin: 1rem auto;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0 1rem;
+            }
+
+            .connect-wallet-btn, .explore-doma-btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
             }
 
             .global-globe {
-                width: 300px;
-                height: 300px;
+                width: 200px;
+                height: 200px;
+                top: 40%;
             }
 
             .globe-glow {
-                width: 400px;
-                height: 400px;
+                width: 300px;
+                height: 300px;
+                top: 40%;
+            }
+
+            .floating-elements {
+                display: none;
+            }
+
+            /* Ensure globe is visible and interactive */
+            #globe-container {
+                z-index: 0;
+                height: 60vh;
+                top: 20%;
+            }
+
+            .ui-overlay {
+                z-index: 1;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+            }
+
+            /* Persona modal adjustments for mobile */
+            .persona-modal {
+                width: 95%;
+                padding: 1.5rem;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .persona-options {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                width: 100%;
+            }
+        }
+
+        /* Additional mobile optimizations */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.8rem;
+                top: 2%;
+            }
+
+            .subtitle {
+                font-size: 0.8rem;
+                top: 8%;
+            }
+
+            .portal-buttons {
+                bottom: 3%;
+            }
+
+            .global-globe {
+                width: 150px;
+                height: 150px;
+            }
+
+            .globe-glow {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        /* Landscape mode adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .main-title {
+                font-size: 1.5rem;
+                top: 1%;
+            }
+
+            .subtitle {
+                font-size: 0.8rem;
+                top: 8%;
+            }
+
+            .portal-buttons {
+                bottom: 2%;
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+
+            .portal-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            #globe-container {
+                height: 70vh;
+                top: 15%;
             }
         }
     </style>
@@ -635,9 +865,9 @@
                 <span class="wallet-icon">🔗</span>
                 <span class="wallet-text">Connect Wallet</span>
             </button>
-            <button class="explore-somnia-btn" onclick="exploreSomnia()">
-                <span class="somnia-icon">🌐</span>
-                <span class="somnia-text">Explore Somnia</span>
+            <button class="explore-doma-btn" onclick="exploreDoma()">
+                <span class="doma-icon">🌐</span>
+                <span class="doma-text">DOMA Protokol</span>
             </button>
         </div>
         
@@ -646,10 +876,8 @@
         
         <div class="portal-buttons">
             <button class="portal-btn" onclick="window.location.href='personas.html'">View All Personas</button>
-            <button class="portal-btn creator-btn" onclick="enterCreatorRealm()">Content Creator Realm</button>
-            <button class="portal-btn" onclick="enterAcademicHall()">Academic Hall</button>
             <button class="portal-btn creator-btn" onclick="generatePersona()">Generate New Persona</button>
-            <button class="portal-btn" onclick="showNFTPortal()">🖼️ NFT Portal</button>
+            <button class="portal-btn" onclick="showNFTPortal()">🖼️ DOMA Portal</button>
         </div>
         
         <div class="info-panel">
@@ -672,7 +900,7 @@
             </div>
 
             <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,20,147,0.3);">
-                <h4 style="color: #00ffff; margin-bottom: 0.5rem;">🌐 Somnia Network</h4>
+                <h4 style="color: #00ffff; margin-bottom: 0.5rem;">🌐 DOMA Network</h4>
                 <div class="generation-stats">
                     <div class="stat-item">
                         <span class="stat-value" id="blockHeight">--</span>
@@ -685,204 +913,169 @@
                 </div>
             </div>
         </div>
-        
-        <div class="country-info" id="country-info">
+
+        <!-- Persona Generation Modal -->
+        <div class="persona-modal" id="personaModal">
+            <h3>Generate New Persona</h3>
+            <textarea class="persona-input" placeholder="Describe your desired AI persona... (e.g., 'A Japanese anime artist specializing in cyberpunk themes')"></textarea>
+            
+            <div class="persona-options">
+                <div class="persona-option active" data-type="creative">Creative</div>
+                <div class="persona-option" data-type="technical">Technical</div>
+                <div class="persona-option" data-type="cultural">Cultural</div>
+                <div class="persona-option" data-type="historical">Historical</div>
             </div>
-    </div>
-    
-    <div class="floating-elements">
-        <div class="floating-element element-1"></div>
-        <div class="floating-element element-2"></div>
-        <div class="floating-element element-3"></div>
-        <div class="floating-element element-4"></div>
-    </div>
-    
-    <div class="nft-modal" id="nftModal">
-        <div class="modal-header">
-            <h3 style="color: #ff1493;">🖼️ NFT Portal Access</h3>
-            <button class="close-modal" onclick="closeNFTPortal()">×</button>
-        </div>
-        <div class="nft-mint-section">
-            <div class="nft-preview">
-                ✨
-            </div>
-            <h4 style="color: #fff;">Mint a Somnia AI Hybrid</h4>
-            <p style="color: #cbd5e1; font-size: 0.9rem;">Own the rights to a unique AI Persona generated on the Somnia Chain.</p>
-            <p class="mint-price">Price: 0.05 ETH</p>
-            <button class="mint-button" onclick="mintNFT()">Mint Now</button>
-        </div>
-        
-        <div style="text-align: center; margin-top: 2rem;">
-            <p style="font-size: 0.8rem; color: #94a3b8;">Powered by</p>
-            <div class="ai-providers">
-                <span class="ai-provider-badge active">Gemini</span>
-                <span class="ai-provider-badge">Claude</span>
-                <span class="ai-provider-badge">GPT-4</span>
+
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closePersonaModal()">Cancel</button>
+                <button class="modal-btn generate" onclick="startPersonaGeneration()">Generate Persona</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Placeholder functions for the buttons (replace with actual logic)
-        function connectWallet() {
-            alert("Connecting Wallet... (Logic to be implemented)");
-            document.querySelector('.connect-wallet-btn').classList.add('wallet-connected');
-            document.querySelector('.wallet-text').textContent = 'Wallet Connected';
-        }
-        
-        function exploreSomnia() {
-            alert("Exploring Somnia... (Logic to be implemented)");
-        }
-        
-        function enterCreatorRealm() {
-            alert("Entering Creator Realm... (Logic to be implemented)");
-        }
-        
-        function enterAcademicHall() {
-            alert("Entering Academic Hall... (Logic to be implemented)");
-        }
-        
-        function generatePersona() {
-            alert("Generating New Persona... (Logic to be implemented)");
-        }
-        
-        function showNFTPortal() {
-            document.getElementById('nftModal').style.display = 'block';
-        }
-
-        function closeNFTPortal() {
-            document.getElementById('nftModal').style.display = 'none';
-        }
-
-        function mintNFT() {
-            alert("Minting NFT... Please confirm transaction in your wallet.");
-        }
-
-        // Global Variable Placeholders
-        document.getElementById('blockHeight').textContent = '4,521,900';
-        document.getElementById('gasPrice').textContent = '12 Gwei';
-
-        // Loading Screen Logic (Simulated Loading)
-        let progress = 0;
-        const progressBar = document.getElementById('loadingProgress');
-        const loadingScreen = document.getElementById('loadingScreen');
-
-        function updateLoading() {
-            progress += 5;
-            if (progress <= 100) {
-                progressBar.style.width = progress + '%';
-                setTimeout(updateLoading, 100);
-            } else {
-                setTimeout(() => {
-                    loadingScreen.style.opacity = '0';
+        // Simulate loading
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const loadingProgress = document.getElementById('loadingProgress');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
                     setTimeout(() => {
-                        loadingScreen.style.display = 'none';
-                    }, 800);
-                }, 500);
-            }
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 800);
+                    }, 500);
+                }
+                loadingProgress.style.width = progress + '%';
+            }, 200);
+        });
+
+        // Persona Generation Modal Functions
+        function generatePersona() {
+            const modal = document.getElementById('personaModal');
+            modal.style.display = 'block';
+            
+            // Add click handlers for persona options
+            const options = document.querySelectorAll('.persona-option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    options.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
         }
-        
-        updateLoading();
 
+        function closePersonaModal() {
+            const modal = document.getElementById('personaModal');
+            modal.style.display = 'none';
+        }
 
-        // Three.js Code (Simplified for brevity)
-        const container = document.getElementById('globe-container');
-        let scene, camera, renderer, controls, sphere;
+        function startPersonaGeneration() {
+            const input = document.querySelector('.persona-input');
+            const activeOption = document.querySelector('.persona-option.active');
+            
+            if (input.value.trim() === '') {
+                alert('Please describe your desired persona!');
+                return;
+            }
 
-        function initThree() {
-            // Scene Setup
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
+            // Show loading state
+            const generateBtn = document.querySelector('.modal-btn.generate');
+            const originalText = generateBtn.textContent;
+            generateBtn.textContent = 'Generating...';
+            generateBtn.disabled = true;
+
+            // Simulate generation process
+            setTimeout(() => {
+                alert(`Persona generation started!\nType: ${activeOption.dataset.type}\nDescription: ${input.value}`);
+                closePersonaModal();
+                generateBtn.textContent = originalText;
+                generateBtn.disabled = false;
+                input.value = '';
+            }, 2000);
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('personaModal');
+            if (event.target === modal) {
+                closePersonaModal();
+            }
+        });
+
+        // Existing functions
+        function connectWallet() {
+            alert('Wallet connection functionality would be implemented here!');
+            const btn = document.querySelector('.connect-wallet-btn');
+            btn.classList.add('wallet-connected');
+            btn.innerHTML = '<span class="wallet-icon">✅</span><span class="wallet-text">Connected</span>';
+        }
+
+        function exploreDoma() {
+            alert('Redirecting to DOMA Protocol dashboard...');
+        }
+
+        function showNFTPortal() {
+            alert('Opening DOMA NFT Portal...');
+        }
+
+        // Initialize Three.js globe (simplified version)
+        function initGlobe() {
+            const container = document.getElementById('globe-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(renderer.domElement);
             
-            camera.position.z = 5;
-
-            // Globe/Sphere
-            const geometry = new THREE.SphereGeometry(1.5, 64, 64);
-            const material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
-            sphere = new THREE.Mesh(geometry, material);
-            scene.add(sphere);
-
-            // Controls (Allows rotating the globe)
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.minDistance = 3;
-            controls.maxDistance = 10;
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = 0.5;
-            controls.enablePan = false;
-            controls.enableZoom = false; 
-
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-            scene.add(ambientLight);
-
-            // Add glowing rings and points (simple example)
-            function addGlowEffect(radius, color, thickness) {
-                const ringGeometry = new THREE.RingGeometry(radius, radius + thickness, 64);
-                const ringMaterial = new THREE.MeshBasicMaterial({ 
-                    color: color, 
-                    side: THREE.DoubleSide, 
-                    transparent: true, 
-                    opacity: 0.3 
-                });
-                const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-                ring.rotation.x = Math.PI / 2;
-                scene.add(ring);
-            }
-
-            addGlowEffect(1.6, 0x00ffff, 0.01); 
-            addGlowEffect(1.8, 0xff1493, 0.005);
-
-            // Add random data points (simulating activity)
-            const pointsGeometry = new THREE.BufferGeometry();
-            const pointsMaterial = new THREE.PointsMaterial({
+            // Create a simple sphere for the globe
+            const geometry = new THREE.SphereGeometry(5, 32, 32);
+            const material = new THREE.MeshBasicMaterial({ 
                 color: 0x00ffff,
-                size: 0.05,
-                sizeAttenuation: true
+                wireframe: true,
+                transparent: true,
+                opacity: 0.3
             });
-            const vertices = [];
-            for (let i = 0; i < 500; i++) {
-                const vector = new THREE.Vector3().setFromSphericalCoords(
-                    1.5, // radius
-                    Math.acos(Math.random() * 2 - 1), // phi
-                    Math.random() * 2 * Math.PI // theta
-                );
-                vertices.push(vector.x, vector.y, vector.z);
-            }
-            pointsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-            const points = new THREE.Points(pointsGeometry, pointsMaterial);
-            scene.add(points);
-
-            animate();
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
+            const globe = new THREE.Mesh(geometry, material);
+            scene.add(globe);
             
-            // Sphere rotation (in case autoRotate is disabled)
-            if (sphere) {
-                // sphere.rotation.y += 0.001; 
+            camera.position.z = 15;
+            
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            
+            // Add point light
+            const pointLight = new THREE.PointLight(0xff1493, 1, 100);
+            pointLight.position.set(10, 10, 10);
+            scene.add(pointLight);
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                globe.rotation.y += 0.005;
+                renderer.render(scene, camera);
             }
-
-            controls.update();
-            renderer.render(scene, camera);
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
         }
 
-        function onWindowResize() {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        }
-
-        window.addEventListener('resize', onWindowResize, false);
-
-        // Wait for the loading screen to finish before starting Three.js
-        setTimeout(initThree, 1800); 
-
+        // Initialize the globe when the page loads
+        setTimeout(initGlobe, 1000);
     </script>
 </body>
 </html>
