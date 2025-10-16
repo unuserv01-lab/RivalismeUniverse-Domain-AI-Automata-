@@ -1,1081 +1,904 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rivalisme Universe - Cosmic Portal</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #000;
-            color: white;
-            font-family: 'Orbitron', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        #globe-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .ui-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .ui-overlay > * {
-            pointer-events: auto;
-        }
-
-        .main-title {
-            position: absolute;
-            top: 8%;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 4rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #ff1493, #00ffff, #ff1493);
-            background-size: 200% 200%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: neonPulse 3s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(255,20,147,0.8);
-            z-index: 10;
-        }
-
-        @keyframes neonPulse {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .subtitle {
-            position: absolute;
-            top: 18%;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 1.5rem;
-            color: #00ffff;
-            text-shadow: 0 0 10px rgba(0,255,255,0.6);
-            z-index: 10;
-        }
-
-        .portal-buttons {
-            position: absolute;
-            bottom: 15%;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            z-index: 10;
-        }
-
-        .portal-btn {
-            padding: 1.2rem 2.5rem;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid #00ffff;
-            color: #00ffff;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .portal-btn:hover {
-            background: #00ffff;
-            color: #000;
-            box-shadow: 0 0 30px #00ffff, 0 0 60px rgba(0, 255, 255, 0.5);
-            transform: translateY(-5px);
-        }
-
-        .creator-btn {
-            border-color: #ff1493;
-            color: #ff1493;
-        }
-
-        .creator-btn:hover {
-            background: #ff1493;
-            color: #000;
-            box-shadow: 0 0 30px #ff1493, 0 0 60px rgba(255, 20, 147, 0.5);
-        }
-
-        .info-panel {
-            position: absolute;
-            top: 30%;
-            right: 5%;
-            width: 300px;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 2px solid rgba(255, 20, 147, 0.3);
-            z-index: 10;
-            pointer-events: auto;
-        }
-
-        .info-panel h3 {
-            color: #00ffff;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .info-panel p {
-            color: #cbd5e1;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ff1493;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #94a3b8;
-        }
-
-        .country-info {
-            position: absolute;
-            top: 30%;
-            left: 5%;
-            width: 300px;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 2px solid rgba(255, 20, 147, 0.3);
-            z-index: 10;
-            pointer-events: auto;
-            display: none;
-        }
-
-        .country-info h3 {
-            color: #00ffff;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .country-info p {
-            color: #cbd5e1;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .persona-list {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .persona-item {
-            padding: 0.5rem;
-            margin: 0.5rem 0;
-            background: rgba(255, 20, 147, 0.1);
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .persona-item:hover {
-            background: rgba(255, 20, 147, 0.3);
-            transform: translateX(5px);
-        }
-
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .floating-element {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,20,147,0.3) 0%, transparent 70%);
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .element-1 {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .element-2 {
-            top: 60%;
-            left: 15%;
-            animation-delay: 2s;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 70%);
-        }
-
-        .element-3 {
-            top: 30%;
-            right: 10%;
-            animation-delay: 4s;
-            width: 120px;
-            height: 120px;
-        }
-
-        .element-4 {
-            top: 70%;
-            right: 15%;
-            animation-delay: 6s;
-            background: radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 70%);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .pulse-ring {
-            position: absolute;
-            border: 2px solid #00ffff;
-            border-radius: 50%;
-            animation: pulse 3s infinite;
-            z-index: 1;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.8); opacity: 1; }
-            100% { transform: scale(2); opacity: 0; }
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 5s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
-
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #000000 0%, #1a1a2e 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 0.8s ease;
-        }
-
-        .loading-title {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: 4px;
-            margin-bottom: 2rem;
-            background: linear-gradient(45deg, #ff1493, #00ffff, #ff1493);
-            background-size: 200% 200%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: neonPulse 3s ease-in-out infinite;
-        }
-
-        .loading-bar {
-            width: 300px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 2rem;
-        }
-
-        .loading-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #ff1493, #00ffff);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* NEW FEATURES STYLES */
-        .wallet-section {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .connect-wallet-btn, .explore-doma-btn {
-            padding: 0.8rem 1.5rem;
-            border: 2px solid #00ffff;
-            background: rgba(0, 255, 255, 0.1);
-            color: #00ffff;
-            border-radius: 25px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .connect-wallet-btn:hover, .explore-doma-btn:hover {
-            background: #00ffff;
-            color: #000;
-            box-shadow: 0 0 30px #00ffff;
-            transform: translateY(-2px);
-        }
-
-        .wallet-connected {
-            background: rgba(0, 255, 0, 0.2);
-            border-color: #00ff00;
-            color: #00ff00;
-        }
-
-        .nft-mint-section {
-            background: rgba(30, 41, 59, 0.9);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 2px solid rgba(255, 20, 147, 0.3);
-            text-align: center;
-        }
-
-        .nft-preview {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 1.5rem;
-            border-radius: 15px;
-            border: 3px solid #00ffff;
-            background: linear-gradient(45deg, #1a1a2e, #16213e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nft-preview::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 20, 147, 0.3), transparent);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .mint-price {
-            color: #00ffff;
-            font-size: 1.2rem;
-            margin: 1rem 0;
-        }
-
-        .mint-button {
-            padding: 1rem 2rem;
-            border: 2px solid #ff1493;
-            background: rgba(255, 20, 147, 0.2);
-            color: #ff1493;
-            border-radius: 50px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .mint-button:hover {
-            background: #ff1493;
-            color: #000;
-            box-shadow: 0 0 30px #ff1493;
-            transform: translateY(-3px);
-        }
-
-        .ai-providers {
-            display: flex;
-            gap: 1rem;
-            margin: 1rem 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .ai-provider-badge {
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .ai-provider-badge.active {
-            background: rgba(0, 255, 255, 0.2);
-            border-color: #00ffff;
-            color: #00ffff;
-        }
-
-        .generation-stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-            color: #00ffff;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.1rem;
-            font-weight: bold;
-            display: block;
-        }
-
-        .global-globe {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, 
-                rgba(0, 255, 255, 0.1) 0%,
-                rgba(255, 20, 147, 0.05) 40%,
-                transparent 70%);
-            box-shadow: 
-                0 0 200px rgba(0, 255, 255, 0.3),
-                inset 0 0 100px rgba(255, 20, 147, 0.2);
-            animation: globeRotate 60s linear infinite;
-            z-index: -1;
-            opacity: 0.6;
-        }
-
-        .globe-glow {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            border-radius: 50%;
-            background: radial-gradient(circle, 
-                rgba(0, 255, 255, 0.1) 0%,
-                rgba(255, 20, 147, 0.05) 30%,
-                transparent 70%);
-            animation: globePulse 8s ease-in-out infinite;
-            z-index: -2;
-        }
-
-        @keyframes globeRotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @keyframes globePulse {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
-        }
-
-        /* NFT Modal */
-        .nft-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 2px solid rgba(255, 20, 147, 0.3);
-            z-index: 1000;
-            display: none;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: #ff1493;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Persona Generation Modal */
-        .persona-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 2px solid rgba(255, 20, 147, 0.3);
-            z-index: 1000;
-            display: none;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 0 50px rgba(255, 20, 147, 0.5);
-        }
-
-        .persona-modal h3 {
-            color: #00ffff;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-size: 1.5rem;
-        }
-
-        .persona-input {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 20, 147, 0.3);
-            border-radius: 10px;
-            color: white;
-            font-family: 'Orbitron', sans-serif;
-            margin-bottom: 1.5rem;
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .persona-input:focus {
-            outline: none;
-            border-color: #00ffff;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .persona-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .persona-option {
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .persona-option:hover {
-            background: rgba(255, 20, 147, 0.2);
-            border-color: #ff1493;
-        }
-
-        .persona-option.active {
-            background: rgba(0, 255, 255, 0.2);
-            border-color: #00ffff;
-            color: #00ffff;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .modal-btn {
-            padding: 0.8rem 2rem;
-            border: 2px solid;
-            border-radius: 25px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .modal-btn.generate {
-            background: rgba(255, 20, 147, 0.2);
-            border-color: #ff1493;
-            color: #ff1493;
-        }
-
-        .modal-btn.generate:hover {
-            background: #ff1493;
-            color: #000;
-            box-shadow: 0 0 20px #ff1493;
-        }
-
-        .modal-btn.cancel {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
-            color: white;
-        }
-
-        .modal-btn.cancel:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: white;
-        }
-
-        /* Responsive Design - IMPROVED FOR MOBILE */
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 2rem;
-                top: 3%;
-                padding: 0 1rem;
-            }
-
-            .subtitle {
-                font-size: 0.9rem;
-                top: 10%;
-                padding: 0 1rem;
-            }
-
-            .portal-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-                bottom: 5%;
-                padding: 0 1rem;
-            }
-
-            .portal-btn {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-                width: 100%;
-                max-width: 280px;
-            }
-
-            .info-panel, .country-info {
-                position: relative;
-                width: 90%;
-                margin: 1rem auto;
-                right: auto;
-                left: auto;
-                top: auto;
-                transform: none;
-            }
-
-            .wallet-section {
-                position: relative;
-                top: auto;
-                right: auto;
-                justify-content: center;
-                margin: 1rem auto;
-                flex-direction: column;
-                gap: 0.5rem;
-                padding: 0 1rem;
-            }
-
-            .connect-wallet-btn, .explore-doma-btn {
-                width: 100%;
-                max-width: 280px;
-                text-align: center;
-            }
-
-            .global-globe {
-                width: 200px;
-                height: 200px;
-                top: 40%;
-            }
-
-            .globe-glow {
-                width: 300px;
-                height: 300px;
-                top: 40%;
-            }
-
-            .floating-elements {
-                display: none;
-            }
-
-            /* Ensure globe is visible and interactive */
-            #globe-container {
-                z-index: 0;
-                height: 60vh;
-                top: 20%;
-            }
-
-            .ui-overlay {
-                z-index: 1;
-                display: flex;
-                flex-direction: column;
-                height: 100vh;
-            }
-
-            /* Persona modal adjustments for mobile */
-            .persona-modal {
-                width: 95%;
-                padding: 1.5rem;
-                max-height: 90vh;
-                overflow-y: auto;
-            }
-
-            .persona-options {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-buttons {
-                flex-direction: column;
-            }
-
-            .modal-btn {
-                width: 100%;
-            }
-        }
-
-        /* Additional mobile optimizations */
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 1.8rem;
-                top: 2%;
-            }
-
-            .subtitle {
-                font-size: 0.8rem;
-                top: 8%;
-            }
-
-            .portal-buttons {
-                bottom: 3%;
-            }
-
-            .global-globe {
-                width: 150px;
-                height: 150px;
-            }
-
-            .globe-glow {
-                width: 250px;
-                height: 250px;
-            }
-        }
-
-        /* Landscape mode adjustments */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .main-title {
-                font-size: 1.5rem;
-                top: 1%;
-            }
-
-            .subtitle {
-                font-size: 0.8rem;
-                top: 8%;
-            }
-
-            .portal-buttons {
-                bottom: 2%;
-                flex-direction: row;
-                gap: 0.5rem;
-            }
-
-            .portal-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.8rem;
-            }
-
-            #globe-container {
-                height: 70vh;
-                top: 15%;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Rivalisme Universe - Cosmic Portal (TopoJSON)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson@3"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(circle at center, #0a0010 30%, #000 100%);
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+#globe-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+/* ---------- UI ---------- */
+.ui-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.ui-overlay > * {
+  pointer-events: auto;
+}
+/* judul - ANIMASI NEON */
+.main-title {
+  position: absolute;
+  top: clamp(2%, 5vw, 8%);
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: clamp(1.8rem, 6vw, 4rem);
+  font-weight: 900;
+  /* Gradien Neon Pink/Ungu */
+  background: linear-gradient(90deg, #ff00ff, #a020f0, #ff00ff, #a020f0);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: cosmicPulse 6s ease-in-out infinite, neonFlicker 1s steps(10, end) infinite;
+  text-shadow: 
+    0 0 10px #ff00ff, 
+    0 0 20px #a020f0, 
+    0 0 30px rgba(255, 0, 255, 0.8);
+  z-index: 10;
+  letter-spacing: 2px;
+}
+@keyframes cosmicPulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes neonFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 4px #ff00ff, 
+      0 0 10px #a020f0, 
+      0 0 20px rgba(255, 0, 255, 0.6);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+.subtitle {
+  position: absolute;
+  top: clamp(10%, 12vw, 18%);
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+  color: #a020f0;
+  text-shadow: 0 0 8px rgba(160, 32, 240, 0.7);
+  z-index: 10;
+}
+/* wallet section */
+.wallet-section {
+  position: absolute;
+  top: clamp(1rem, 2vw, 2rem);
+  right: clamp(1rem, 2vw, 2rem);
+  display: flex;
+  gap: clamp(0.5rem, 1vw, 1rem);
+  z-index: 20;
+}
+.wallet-btn {
+  padding: clamp(0.6rem, 1.2vw, 0.8rem) clamp(1rem, 2vw, 1.5rem);
+  border: 2px solid #ff00ff;
+  background: rgba(255, 0, 255, 0.1);
+  color: #ff00ff;
+  border-radius: 25px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+}
+.wallet-btn:hover {
+  background: #ff00ff;
+  color: #000;
+  box-shadow: 0 0 20px #ff00ff;
+  transform: translateY(-2px);
+}
+/* tombol bawah */
+.portal-buttons {
+  position: absolute;
+  bottom: clamp(3%, 5vw, 15%);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.5rem, 2vw, 2rem);
+  width: 90%;
+  max-width: 600px;
+  z-index: 10;
+}
+.portal-btn {
+  flex: 1 1 140px;
+  padding: clamp(0.6rem, 2vw, 1.2rem) clamp(1rem, 3vw, 2.5rem);
+  border: 2px solid #a020f0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #a020f0;
+  border-radius: 50px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  backdrop-filter: blur(8px);
+  letter-spacing: 1px;
+  text-align: center;
+}
+.portal-btn:hover {
+  background: #a020f0;
+  color: #000;
+  box-shadow: 0 0 25px #a020f0, 0 0 50px rgba(160, 32, 240, 0.6);
+  transform: translateY(-4px);
+}
+.creator-btn {
+  border-color: #ff00ff;
+  color: #ff00ff;
+}
+.creator-btn:hover {
+  background: #ff00ff;
+  color: #000;
+  box-shadow: 0 0 25px #ff00ff, 0 0 50px rgba(255, 0, 255, 0.6);
+}
+/* panel info kanan */
+.info-panel {
+  position: absolute;
+  top: 30%;
+  right: clamp(2%, 3vw, 5%);
+  width: clamp(260px, 35vw, 300px);
+  background: rgba(15, 0, 30, 0.85);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 0, 255, 0.6);
+  border-radius: 20px;
+  padding: 1.5rem;
+  z-index: 10;
+}
+.info-panel h3 {
+  color: #ff00ff;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 5px #a020f0;
+}
+.info-panel .stats div span {
+  color: #a020f0;
+  text-shadow: 0 0 5px #ff00ff;
+}
+
+/* Modal Gaya Neon */
+#modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: rgba(20, 0, 40, 0.95);
+  color: #fff;
+  border: 2px solid #ff00ff;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+  transition: 0.3s ease;
+  width: 80%;
+  max-width: 400px;
+  z-index: 20;
+  backdrop-filter: blur(5px);
+}
+#modal.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+#modal h2 {
+  color: #a020f0;
+  margin-bottom: 10px;
+  text-shadow: 0 0 8px #ff00ff;
+}
+#modal p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+#modal button {
+  background: #ff00ff;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: 700;
+  transition: 0.3s;
+  box-shadow: 0 0 5px #ff00ff;
+}
+#modal button:hover {
+  background: #a020f0;
+  color: white;
+  box-shadow: 0 0 15px #a020f0;
+}
+
+/* 1. Loading Screen Styles (DIPINDAHKAN DARI personas.html) */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0010 0%, #1a1a2e 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.8s ease;
+}
+
+.loading-title-persona { /* Diganti namanya agar tidak bentrok dengan .main-title */
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, #ff00ff, #a020f0, #ff00ff);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: neonPulse 3s ease-in-out infinite;
+}
+@keyframes neonPulse {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.loading-bar {
+    width: 300px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #ff00ff, #a020f0);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* 2. Persona Generation Modal Styles (DIPINDAHKAN DARI personas.html) */
+.persona-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(15, 0, 30, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid rgba(255, 0, 255, 0.6);
+    z-index: 1000;
+    display: none;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 50px rgba(255, 0, 255, 0.5);
+}
+
+.persona-modal h3 {
+    color: #ff00ff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.persona-input {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 0, 255, 0.1);
+    border: 1px solid rgba(255, 0, 255, 0.3);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 1.5rem;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.persona-input:focus {
+    outline: none;
+    border-color: #a020f0;
+    box-shadow: 0 0 10px rgba(160, 32, 240, 0.5);
+}
+
+.persona-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.persona-option {
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.persona-option:hover {
+    background: rgba(255, 0, 255, 0.2);
+    border-color: #ff00ff;
+}
+
+.persona-option.active {
+    background: rgba(160, 32, 240, 0.3);
+    border-color: #a020f0;
+    color: #ff00ff;
+    box-shadow: 0 0 10px #a020f0;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 0.8rem 2rem;
+    border: 2px solid;
+    border-radius: 25px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-btn.generate {
+    background: rgba(255, 0, 255, 0.2);
+    border-color: #ff00ff;
+    color: #ff00ff;
+}
+
+.modal-btn.generate:hover {
+    background: #ff00ff;
+    color: #000;
+    box-shadow: 0 0 20px #ff00ff;
+}
+
+.modal-btn.cancel {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.modal-btn.cancel:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .wallet-section {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 1rem auto 0;
+    justify-content: center;
+  }
+  .info-panel {
+    position: relative;
+    margin: 1rem auto 0;
+    right: auto;
+    top: auto;
+    width: 90%;
+  }
+  .persona-modal {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  .persona-options {
+    grid-template-columns: 1fr;
+  }
+  .modal-buttons {
+    flex-direction: column;
+  }
+  .modal-btn {
+    width: 100%;
+  }
+}
+</style>
 </head>
 <body>
-    <div class="loading-screen" id="loadingScreen">
-        <h1 class="loading-title">RIVALISME UNIVERSE</h1>
-        <p style="color: #00ffff; margin-bottom: 2rem;">Initializing Cosmic Portal...</p>
-        <div class="loading-bar">
-            <div class="loading-progress" id="loadingProgress"></div>
-        </div>
+<div class="loading-screen" id="loadingScreen">
+    <h1 class="loading-title-persona">RIVALISME UNIVERSE</h1>
+    <p style="color: #a020f0; margin-bottom: 2rem;">Initializing Cosmic Portal...</p>
+    <div class="loading-bar">
+        <div class="loading-progress" id="loadingProgress"></div>
     </div>
-    
-    <div class="global-globe"></div>
-    <div class="globe-glow"></div>
-    
-    <div id="globe-container"></div>
-    
-    <div class="ui-overlay">
-        <div class="wallet-section">
-            <button class="connect-wallet-btn" onclick="connectWallet()">
-                <span class="wallet-icon">🔗</span>
-                <span class="wallet-text">Connect Wallet</span>
-            </button>
-            <button class="explore-doma-btn" onclick="exploreDoma()">
-                <span class="doma-icon">🌐</span>
-                <span class="doma-text">DOMA Protokol</span>
-            </button>
-        </div>
-        
-        <h1 class="main-title">RIVALISME UNIVERSE</h1>
-        <p class="subtitle">Summon AI Personas from Across the Globe</p>
-        
-        <div class="portal-buttons">
-            <button class="portal-btn" onclick="window.location.href='personas.html'">View All Personas</button>
-            <button class="portal-btn creator-btn" onclick="generatePersona()">Generate New Persona</button>
-            <button class="portal-btn" onclick="showNFTPortal()">🖼️ DOMA Portal</button>
-        </div>
-        
-        <div class="info-panel">
-            <h3>Cosmic Portal Active</h3>
-            <p>Select a region on the globe or use the portals to access AI personas from different dimensions of knowledge and creativity.</p>
-            
-            <div class="stats">
-                <div class="stat">
-                    <span class="stat-value" id="persona-count">142</span>
-                    <span class="stat-label">Personas</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value" id="user-count">3.2K</span>
-                    <span class="stat-label">Users</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value" id="country-count">67</span>
-                    <span class="stat-label">Countries</span>
-                </div>
-            </div>
+</div>
 
-            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,20,147,0.3);">
-                <h4 style="color: #00ffff; margin-bottom: 0.5rem;">🌐 DOMA Network</h4>
-                <div class="generation-stats">
-                    <div class="stat-item">
-                        <span class="stat-value" id="blockHeight">--</span>
-                        <span>Block Height</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value" id="gasPrice">--</span>
-                        <span>Gas Price</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div id="globe-container"></div>
 
-        <!-- Persona Generation Modal -->
-        <div class="persona-modal" id="personaModal">
-            <h3>Generate New Persona</h3>
-            <textarea class="persona-input" placeholder="Describe your desired AI persona... (e.g., 'A Japanese anime artist specializing in cyberpunk themes')"></textarea>
-            
-            <div class="persona-options">
-                <div class="persona-option active" data-type="creative">Creative</div>
-                <div class="persona-option" data-type="technical">Technical</div>
-                <div class="persona-option" data-type="cultural">Cultural</div>
-                <div class="persona-option" data-type="historical">Historical</div>
-            </div>
+<div class="ui-overlay">
+  <h1 class="main-title">RIVALISME UNIVERSE</h1>
+  <p class="subtitle">Summon AI Personas from Across the Globe</p>
 
-            <div class="modal-buttons">
-                <button class="modal-btn cancel" onclick="closePersonaModal()">Cancel</button>
-                <button class="modal-btn generate" onclick="startPersonaGeneration()">Generate Persona</button>
-            </div>
-        </div>
+  <div class="wallet-section">
+    <button class="wallet-btn" onclick="connectWallet()">🔗 Connect Wallet</button>
+    <button class="wallet-btn" onclick="exploreDoma()">🌐 Explore DOMA</button>
+  </div>
+
+  <<button class="portal-btn" onclick="window.location.href='personas.html'">View All Personas</button>
+    <button class="portal-btn creator-btn" onclick="generatePersona()">Generate New Persona</button>
+    <button class="portal-btn">🖼️ DOMA Portal</button>
+  </div>
+
+  <div class="info-panel">
+    <h3>Cosmic Portal Active</h3>
+    <p style="font-size: 0.9rem; line-height: 1.5; color: #cbd5e1;">
+      Zoom / drag globe. Click neon pulses to reveal personas.
+    </p>
+    <div class="stats" style="display: flex; justify-content: space-between; margin-top: 1.2rem; font-size: 0.8rem;">
+      <div><span>23</span><br/>Personas</div>
+      <div><span>3.2 K</span><br/>Users</div>
+      <div><span>195</span><br/>Countries</div>
     </div>
+  </div>
 
-    <script>
-        // Simulate loading
-        window.addEventListener('load', function() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            const loadingProgress = document.getElementById('loadingProgress');
+  <div id="modal">
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+    <button onclick="window.open(currentLink, '_blank')">Masuki Persona</button><br />
+    <button onclick="closeModal()">Tutup</button>
+  </div>
+
+  <div class="persona-modal" id="personaModal">
+      <h3>Generate New Persona</h3>
+      <textarea class="persona-input" placeholder="Describe your desired AI persona... (e.g., 'A Japanese anime artist specializing in cyberpunk themes')"></textarea>
+      
+      <div class="persona-options">
+          <div class="persona-option active" data-type="creative">Creative</div>
+          <div class="persona-option" data-type="technical">Technical</div>
+          <div class="persona-option" data-type="cultural">Cultural</div>
+          <div class="persona-option" data-type="historical">Historical</div>
+      </div>
+
+      <div class="modal-buttons">
+          <button class="modal-btn cancel" onclick="closePersonaModal()">Cancel</button>
+          <button class="modal-btn generate" onclick="startPersonaGeneration()">Generate Persona</button>
+      </div>
+  </div>
+
+</div>
+
+<script>
+// =================================================================
+// GLOBE/THREE.JS INITIALLIZATION FUNCTION DIBUNGKUS
+// =================================================================
+let globe, controls, renderer, scene, camera, pulseGroup, raycaster, mouse, currentLink, modal;
+
+function initializeGlobe() {
+    // --- SETUP DASAR (DIAMBIL DARI 3D.html ASLI) ---
+    const container = document.getElementById('globe-container');
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 14);
+
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 6;
+    controls.maxDistance = 25;
+    controls.enablePan = false;
+
+    // --- GLOBE BASE ---
+    const globeRadius = 5;
+    const globeGeom = new THREE.SphereGeometry(globeRadius, 64, 64);
+    const globeMat = new THREE.MeshBasicMaterial({ color: 0x00ffff, wireframe: true, transparent: true, opacity: 0.15 });
+    globe = new THREE.Mesh(globeGeom, globeMat);
+    scene.add(globe);
+
+    // --- LIGHTS ---
+    const light1 = new THREE.PointLight(0xff00ff, 1.5, 50);
+    light1.position.set(10, 10, 10);
+    scene.add(light1);
+
+    const light2 = new THREE.PointLight(0xa020f0, 1, 50);
+    light2.position.set(-10, -10, -10);
+    scene.add(light2);
+
+    // --- BACKGROUND STARS ---
+    function addStars() {
+        const starGeo = new THREE.BufferGeometry();
+        const starCount = 5000;
+        const starPos = [];
+        for (let i = 0; i < starCount; i++) {
+          const x = (Math.random() - 0.5) * 2000;
+          const y = (Math.random() - 0.5) * 2000;
+          const z = (Math.random() - 0.5) * 2000;
+          starPos.push(x, y, z);
+        }
+        starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3));
+        const starMat = new THREE.PointsMaterial({ 
+          color: 0xffffff, 
+          size: 0.3, 
+          transparent: true, 
+          opacity: 0.8,
+          sizeAttenuation: true
+        });
+        scene.add(new THREE.Points(starGeo, starMat));
+    }
+    addStars();
+
+    // --- FUNGSI KONVERSI KOORDINAT ---
+    function latLonToVector3(lat, lon, r) {
+        const phi = (90 - lat) * (Math.PI / 180);
+        const theta = (lon + 180) * (Math.PI / 180);
+        const x = -(r * Math.sin(phi) * Math.cos(theta));
+        const z = (r * Math.sin(phi) * Math.sin(theta));
+        const y = (r * Math.cos(phi));
+        return new THREE.Vector3(x, y, z);
+    }
+
+    // =================================================================
+    // IMPLEMENTASI GARIS PULAU/NEGARA DARI TOPOJSON 
+    // =================================================================
+    fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+        .then(res => res.json())
+        .then(data => {
+            const countries = topojson.feature(data, data.objects.countries).features;
+            drawWorldOutline(countries);
+            addCityLights(countries);
+        });
+
+    function drawWorldOutline(features) {
+        const lineMat = new THREE.LineBasicMaterial({
+            color: 0xFF00FF,
+            transparent: true,
+            opacity: 0.9,
+            linewidth: 1.5
+        });
+        
+        features.forEach(feature => {
+            const coords = feature.geometry.coordinates;
+            const type = feature.geometry.type;
+            if (type === "Polygon") {
+                coords.forEach(ring => addLine(ring, lineMat)); 
+            } else if (type === "MultiPolygon") {
+                coords.forEach(polygon => polygon.forEach(ring => addLine(ring, lineMat)));
+            }
+        });
+    }
+
+    function addLine(ring, material) {
+        const points = [];
+        ring.forEach(coord => {
+            const lon = coord[0];
+            const lat = coord[1];
+            points.push(latLonToVector3(lat, lon, globeRadius + 0.005));
+        });
+        
+        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+        const line = new THREE.Line(geometry, material);
+        globe.add(line);
+    }
+
+    // =================================================================
+    // TITIK KUNING (LAMPU KOTA) YANG BERKEDIP
+    // =================================================================
+    function addCityLights(countries) {
+        const cityLightGroup = new THREE.Group();
+        globe.add(cityLightGroup);
+        
+        function getRandomPointInPolygon(ring) {
+            let minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity;
+            ring.forEach(coord => {
+                const lon = coord[0], lat = coord[1];
+                if (lon < minLon) minLon = lon;
+                if (lon > maxLon) maxLon = lon;
+                if (lat < minLat) minLat = lat;
+                if (lat > maxLat) maxLat = lat;
+            });
             
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 15;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        loadingScreen.style.opacity = '0';
-                        setTimeout(() => {
-                            loadingScreen.style.display = 'none';
-                        }, 800);
-                    }, 500);
+            let attempts = 0;
+            while (attempts < 100) {
+                const lon = minLon + Math.random() * (maxLon - minLon);
+                const lat = minLat + Math.random() * (maxLat - minLat);
+                if (pointInPolygon([lon, lat], ring)) {
+                    return { lat, lon };
                 }
-                loadingProgress.style.width = progress + '%';
-            }, 200);
-        });
-
-        // Persona Generation Modal Functions
-        function generatePersona() {
-            const modal = document.getElementById('personaModal');
-            modal.style.display = 'block';
+                attempts++;
+            }
+            return null;
+        }
+        
+        function pointInPolygon(point, vs) {
+            const x = point[0], y = point[1];
+            let inside = false;
+            for (let i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+                const xi = vs[i][0], yi = vs[i][1];
+                const xj = vs[j][0], yj = vs[j][1];
+                
+                const intersect = ((yi > y) !== (yj > y)) &&
+                    (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+            return inside;
+        }
+        
+        countries.forEach(country => {
+            const coords = country.geometry.coordinates;
+            const type = country.geometry.type;
+            let numPoints = Math.floor(Math.random() * 6) + 5; 
             
-            // Add click handlers for persona options
-            const options = document.querySelectorAll('.persona-option');
-            options.forEach(option => {
-                option.addEventListener('click', function() {
-                    options.forEach(opt => opt.classList.remove('active'));
-                    this.classList.add('active');
+            if (type === "Polygon") {
+                const outerRing = coords[0];
+                for (let i = 0; i < numPoints; i++) {
+                    const point = getRandomPointInPolygon(outerRing);
+                    if (point) {
+                        addCityLight(point.lat, point.lon, cityLightGroup);
+                    }
+                }
+            } else if (type === "MultiPolygon") {
+                coords.forEach(polygon => {
+                    const outerRing = polygon[0];
+                    for (let i = 0; i < numPoints; i++) {
+                        const point = getRandomPointInPolygon(outerRing);
+                        if (point) {
+                            addCityLight(point.lat, point.lon, cityLightGroup);
+                        }
+                    }
                 });
-            });
-        }
-
-        function closePersonaModal() {
-            const modal = document.getElementById('personaModal');
-            modal.style.display = 'none';
-        }
-
-        function startPersonaGeneration() {
-            const input = document.querySelector('.persona-input');
-            const activeOption = document.querySelector('.persona-option.active');
-            
-            if (input.value.trim() === '') {
-                alert('Please describe your desired persona!');
-                return;
-            }
-
-            // Show loading state
-            const generateBtn = document.querySelector('.modal-btn.generate');
-            const originalText = generateBtn.textContent;
-            generateBtn.textContent = 'Generating...';
-            generateBtn.disabled = true;
-
-            // Simulate generation process
-            setTimeout(() => {
-                alert(`Persona generation started!\nType: ${activeOption.dataset.type}\nDescription: ${input.value}`);
-                closePersonaModal();
-                generateBtn.textContent = originalText;
-                generateBtn.disabled = false;
-                input.value = '';
-            }, 2000);
-        }
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('personaModal');
-            if (event.target === modal) {
-                closePersonaModal();
             }
         });
+    }
 
-        // Existing functions
-        function connectWallet() {
-            alert('Wallet connection functionality would be implemented here!');
-            const btn = document.querySelector('.connect-wallet-btn');
-            btn.classList.add('wallet-connected');
-            btn.innerHTML = '<span class="wallet-icon">✅</span><span class="wallet-text">Connected</span>';
-        }
-
-        function exploreDoma() {
-            alert('Redirecting to DOMA Protocol dashboard...');
-        }
-
-        function showNFTPortal() {
-            alert('Opening DOMA NFT Portal...');
-        }
-
-        // Initialize Three.js globe (simplified version)
-        function initGlobe() {
-            const container = document.getElementById('globe-container');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            container.appendChild(renderer.domElement);
-            
-            // Create a simple sphere for the globe
-            const geometry = new THREE.SphereGeometry(5, 32, 32);
-            const material = new THREE.MeshBasicMaterial({ 
-                color: 0x00ffff,
-                wireframe: true,
+    function addCityLight(lat, lon, group) {
+        const pos = latLonToVector3(lat, lon, globeRadius + 0.01);
+        const cityLight = new THREE.Mesh(
+            new THREE.SphereGeometry(0.03, 8, 8),
+            new THREE.MeshBasicMaterial({ 
+                color: 0xffff00, 
                 transparent: true,
-                opacity: 0.3
-            });
-            const globe = new THREE.Mesh(geometry, material);
-            scene.add(globe);
-            
-            camera.position.z = 15;
-            
-            // Add ambient light
-            const ambientLight = new THREE.AmbientLight(0x404040);
-            scene.add(ambientLight);
-            
-            // Add point light
-            const pointLight = new THREE.PointLight(0xff1493, 1, 100);
-            pointLight.position.set(10, 10, 10);
-            scene.add(pointLight);
-            
-            // Animation
-            function animate() {
-                requestAnimationFrame(animate);
-                globe.rotation.y += 0.005;
-                renderer.render(scene, camera);
-            }
-            
-            animate();
-            
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+                opacity: 0.8
+            })
+        );
+        cityLight.position.copy(pos);
+        cityLight.userData = { 
+            originalScale: 1,
+            pulseSpeed: 0.5 + Math.random() * 1.5, 
+            baseOpacity: 0.5 + Math.random() * 0.4 
+        };
+        group.add(cityLight);
+    }
+
+    // --- ISLAND / PERSONA DATA (Titik Interaktif) ---
+    const islandData = [
+        { lat: -7.25, lon: 112.75, name: "Achmad Rival", desc: "The Creator of Rivalisme Universe (Surabaya)", link: "https://rivalismeuniverse.com/achmadrival" },
+        { lat: 35.68, lon: 139.69, name: "Solara", desc: "AI Persona of Eternal Light and Logic (Tokyo)", link: "https://rivalismeuniverse.com/persona/solara" },
+        { lat: 48.85, lon: 2.35, name: "Nexar", desc: "The Dark Thinker – Philosopher of Paradox (Paris)", link: "https://rivalismeuniverse.com/persona/nexar" },
+        { lat: 40.71, lon: -74.00, name: "Cipher", desc: "The Digital Strategist (New York)", link: "https://rivalismeuniverse.com/persona/cipher" },
+        { lat: 51.50, lon: -0.12, name: "Aethel", desc: "AI Historian and Timekeeper (London)", link: "https://rivalismeuniverse.com/persona/aethel" }
+    ];
+
+    pulseGroup = new THREE.Group();
+    globe.add(pulseGroup); 
+
+    islandData.forEach(island => {
+        const { lat, lon } = island;
+        const pos = latLonToVector3(lat, lon, globeRadius + 0.01);
+
+        const pulse = new THREE.Mesh(
+            new THREE.SphereGeometry(0.08, 16, 16),
+            new THREE.MeshBasicMaterial({ 
+                color: 0xff00ff,
+                transparent: true,
+                opacity: 0.9 
+            })
+        );
+        pulse.position.copy(pos);
+        pulse.userData = island;
+        pulseGroup.add(pulse);
+    });
+
+    // --- INTERACTION (Click) ---
+    raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
+    modal = document.getElementById("modal");
+
+    window.addEventListener('click', e => {
+        // Abaikan klik jika modal persona terbuka
+        if (document.getElementById('personaModal').style.display === 'block') {
+            return;
         }
 
-        // Initialize the globe when the page loads
-        setTimeout(initGlobe, 1000);
-    </script>
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(pulseGroup.children);
+        
+        if (intersects.length > 0) {
+            const data = intersects[0].object.userData;
+            openModal(data);
+        } else {
+            closeModal();
+        }
+    });
+
+    // START ANIMATION LOOP
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+} 
+
+function animate() {
+    requestAnimationFrame(animate);
+    if (controls) controls.update(); // Pastikan controls ada
+    if (globe) globe.rotation.y += 0.0011; // Pastikan globe ada
+
+    // Animasi Pulsating untuk titik persona
+    const time = Date.now() * 0.003;
+    if (pulseGroup) {
+        pulseGroup.children.forEach((p, i) => {
+            const scale = 1 + Math.sin(time + i) * 0.3;
+            p.scale.setScalar(scale);
+            p.material.opacity = 0.5 + Math.abs(Math.sin(time + i)) * 0.5;
+        });
+    }
+
+    // Animasi untuk titik kuning (lampu kota)
+    if (globe && globe.children.length > 0) {
+        const cityLights = globe.children.filter(child => 
+            child.children && child.children.some(c => c.material && c.material.color.getHex() === 0xffff00)
+        );
+        
+        if (cityLights.length > 0) {
+            cityLights[0].children.forEach((light, i) => {
+                const userData = light.userData;
+                const scale = userData.originalScale + Math.sin(time * userData.pulseSpeed + i) * 0.2;
+                light.scale.setScalar(scale);
+                light.material.opacity = userData.baseOpacity + Math.sin(time * userData.pulseSpeed * 2 + i) * 0.3;
+            });
+        }
+    }
+
+    if (renderer && scene && camera) { // Pastikan semua elemen rendering ada
+        renderer.render(scene, camera);
+    }
+}
+
+
+// =================================================================
+// LOGIKA LOADING SCREEN (DIPINDAHKAN DAN DIMODIFIKASI)
+// =================================================================
+window.addEventListener('load', function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const loadingProgress = document.getElementById('loadingProgress');
+    
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    // Panggil fungsi utama Three.js setelah loading selesai
+                    initializeGlobe(); 
+                }, 800);
+            }, 500);
+        }
+        loadingProgress.style.width = progress + '%';
+    }, 200);
+});
+
+// =================================================================
+// PERSONA GENERATION MODAL FUNCTIONS (DIPINDAHKAN)
+// =================================================================
+window.generatePersona = function() {
+    const modal = document.getElementById('personaModal');
+    modal.style.display = 'block';
+    
+    const options = document.querySelectorAll('.persona-option');
+    options.forEach(option => {
+        // Pastikan event listener hanya ditambahkan sekali
+        if (!option.onclick) {
+            option.onclick = function() {
+                options.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+            };
+        }
+    });
+}
+
+window.closePersonaModal = function() {
+    const modal = document.getElementById('personaModal');
+    modal.style.display = 'none';
+}
+
+window.startPersonaGeneration = function() {
+    const input = document.querySelector('.persona-modal .persona-input');
+    const activeOption = document.querySelector('.persona-modal .persona-option.active');
+    
+    if (input.value.trim() === '') {
+        alert('Please describe your desired persona!');
+        return;
+    }
+
+    const generateBtn = document.querySelector('.persona-modal .modal-btn.generate');
+    const originalText = generateBtn.textContent;
+    generateBtn.textContent = 'Generating...';
+    generateBtn.disabled = true;
+
+    // Simulasi proses generation
+    setTimeout(() => {
+        alert(`Persona generation started!\nType: ${activeOption.dataset.type}\nDescription: ${input.value}`);
+        closePersonaModal();
+        generateBtn.textContent = originalText;
+        generateBtn.disabled = false;
+        input.value = '';
+    }, 2000);
+}
+
+// Tutup modal ketika klik di luar personaModal
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('personaModal');
+    if (event.target === modal && modal.style.display === 'block') {
+        closePersonaModal();
+    }
+});
+
+
+/* ---------- Fungsi Tombol UI Eksisting ---------- */
+function connectWallet() {
+  alert('Fungsionalitas koneksi Wallet akan diimplementasikan di sini!');
+}
+function exploreDoma() {
+  alert('Mengarahkan ke Dashboard Protokol DOMA...');
+}
+
+/* Fungsi Modal Interaktif */
+function openModal(data) {
+    currentLink = data.link;
+    document.getElementById("modalTitle").textContent = data.name;
+    document.getElementById("modalDesc").textContent = data.desc;
+    modal.classList.add("show");
+}
+function closeModal() {
+    modal.classList.remove("show");
+}
+</script>
 </body>
 </html>
